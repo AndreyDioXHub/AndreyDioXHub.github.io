@@ -85,17 +85,17 @@
 
 			const loader = new GLTFLoader();
 			loader.setDRACOLoader( dracoLoader );
-			loader.load( 'models/gltf/DailyArabica.glb', function ( gltf ) {
+			loader.load( 'models/gltf/LittlestTokyo.glb', function ( gltf ) {
 
 				const model = gltf.scene;
 				model.position.set( 1, 1, 0 );
-				model.scale.set( 1, 1, 1 );
+				model.scale.set( 0.01, 0.01, 0.01 );
 				scene.add( model );
 
-				//mixer = new THREE.AnimationMixer( model );
-				//mixer.clipAction( gltf.animations[ 0 ] ).play();
+				mixer = new THREE.AnimationMixer( model );
+				mixer.clipAction( gltf.animations[ 0 ] ).play();
 
-				//animate();
+				animate();
 
 			}, undefined, function ( e ) {
 
@@ -114,7 +114,7 @@
 			};
 
 
-			/*function animate() {
+			function animate() {
 
 				requestAnimationFrame( animate );
 
@@ -128,7 +128,7 @@
 
 				renderer.render( scene, camera );
 
-			}*/
+			}
 
 
 		</script>
