@@ -92,10 +92,10 @@
 				model.scale.set( 1, 1, 1 );
 				scene.add( model );
 
-				mixer = new THREE.AnimationMixer( model );
-				mixer.clipAction( gltf.animations[ 0 ] ).play();
+				//mixer = new THREE.AnimationMixer( model );
+				//mixer.clipAction( gltf.animations[ 0 ] ).play();
 
-				animate();
+				//animate();
 
 			}, undefined, function ( e ) {
 
@@ -114,7 +114,7 @@
 			};
 
 
-			function animate() {
+			/*function animate() {
 
 				requestAnimationFrame( animate );
 
@@ -128,7 +128,7 @@
 
 				renderer.render( scene, camera );
 
-			}
+			}*/
 
 
 		</script>
