@@ -52,16 +52,16 @@
         let loader = new THREE.GLTFLoader();
         //loader.load("models/car/scene.gltf", function(gltf){
         loader.load("models/prod/Daily_Arabica_1000g.glb", function(glb){
-          car = gltf.scene;
-          car.scale.set(0.5,0.5,0.5);
-          scene.add(glb.scene);
+          const root = glb.scene;
+          root.scale.set(0.5,0.5,0.5);
+          scene.add(root);
         });
 
         const light = new THREE.DirectionalLight(0xffffff,1);
         light.position.set(2,2,5);
         scene.add(light);
         
-        let materialArray = [];
+        /*let materialArray = [];
         let texture_ft = new THREE.TextureLoader().load( 'skybox/penguins/arid2_ft.jpg');
         let texture_bk = new THREE.TextureLoader().load( 'skybox/penguins/arid2_bk.jpg');
         let texture_up = new THREE.TextureLoader().load( 'skybox/penguins/arid2_up.jpg');
@@ -80,7 +80,7 @@
            materialArray[i].side = THREE.BackSide;
         let skyboxGeo = new THREE.BoxGeometry( 10000, 10000, 10000);
         let skybox = new THREE.Mesh( skyboxGeo, materialArray );
-        scene.add( skybox );
+        scene.add( skybox );*/
          
         animate();
 
