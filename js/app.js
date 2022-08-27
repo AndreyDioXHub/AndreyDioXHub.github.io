@@ -34,6 +34,9 @@ var APP = {
 
 			this.setScene( loader.parse( json.scene ) );
 			this.setCamera( loader.parse( json.camera ) );
+				
+			var controls = new THREE.OrbitControls(camera, renderer.domElement);
+			controls.addEventListener('change', renderer);
 
 			events = {
 				init: [],
