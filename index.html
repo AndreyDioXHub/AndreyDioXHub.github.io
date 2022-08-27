@@ -28,7 +28,10 @@
 			import { APP } from './js/app.js';
 			import { VRButton } from './js/VRButton.js';
 
+			THREE.EventDispatcher.apply( this );
+			
 			window.THREE = THREE; // Used by APP Scripts.
+
 			window.VRButton = VRButton; // Used by APP Scripts.
 
 			var loader = new THREE.FileLoader();
