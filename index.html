@@ -63,6 +63,13 @@
             flex-shrink: 0;
             position: relative;
         }
+        
+        .photo-container img.photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
 
         .photo-container:after {
             content: '';
@@ -376,9 +383,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="photo-container">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user-circle fa-6x"></i>
-                    </div>
+                    <img src="photo.jpg" alt="Андрей Оргебо" class="photo">
                 </div>
                 <div class="header-text">
                     <h1>Андрей Оргебо</h1>
@@ -407,6 +412,29 @@
             </div>
         </div>
     </header>
+
+    <!-- Видео-презентация сразу после хедера -->
+    <section id="intro-video">
+        <div class="container">
+            <div class="section-title">
+                <i class="fas fa-video"></i>
+                <h2>Кратко обо мне</h2>
+            </div>
+            
+            <div class="card">
+                <h3>Видео-презентация</h3>
+                <p>Немного о моих подходах к разработке и профессиональном опыте:</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/8VuH8lZSQqw" 
+                            title="Видео о разработчике" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="experience">
         <div class="container">
@@ -443,8 +471,8 @@
     <section id="projects">
         <div class="container">
             <div class="section-title">
-                <i class="fas fa-code-branch"></i>
-                <h2>GitHub проекты</h2>
+                <i class="fas fa-code"></i>
+                <h2>Примеры кода / Пет-проекты</h2>
             </div>
             
             <div class="card">
@@ -486,24 +514,11 @@
     <section id="showcase">
         <div class="container">
             <div class="section-title">
-                <i class="fas fa-video"></i>
-                <h2>Демонстрация проектов</h2>
+                <i class="fas fa-gamepad"></i>
+                <h2>Демонстрация игровых проектов</h2>
             </div>
             
             <div class="card">
-                <div class="project-item">
-                    <h3>Видео-презентация</h3>
-                    <p>Краткое видео о моих навыках и подходах к разработке:</p>
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/8VuH8lZSQqw" 
-                                title="Видео о разработчике" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                
                 <div class="project-item">
                     <h3>Those Who Remain</h3>
                     <p>Полностью завершенный игровой проект. Занимался оптимизацией: настройка окклюзии, каллинга, LOD-систем. Работал над игровыми механиками и логикой.</p>
