@@ -33,6 +33,57 @@
                               radial-gradient(circle at 80% 70%, rgba(46, 204, 113, 0.05) 0%, transparent 20%);
         }
 
+        /* Счетчик просмотров */
+        .view-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: pulse-counter 2s infinite alternate;
+            backdrop-filter: blur(5px);
+        }
+
+        .view-counter i {
+            font-size: 1rem;
+        }
+
+        .view-counter .count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 10px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        @keyframes pulse-counter {
+            0% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .view-counter {
+                top: 10px;
+                right: 10px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -427,6 +478,13 @@
     </style>
 </head>
 <body>
+    <!-- Счетчик просмотров -->
+    <div class="view-counter" id="viewCounter">
+        <i class="fas fa-eye"></i>
+        <span>Просмотры:</span>
+        <span class="count" id="viewCount">0</span>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -865,6 +923,48 @@
                     videoContainer.parentNode.insertBefore(errorMessage, videoContainer.nextSibling);
                 });
             }
+            
+            // Счетчик просмотров
+            function updateViewCounter() {
+                let viewCount = localStorage.getItem('portfolioViewCount');
+                
+                if (!viewCount) {
+                    viewCount = 1;
+                } else {
+                    viewCount = parseInt(viewCount) + 1;
+                }
+                
+                localStorage.setItem('portfolioViewCount', viewCount);
+                document.getElementById('viewCount').textContent = viewCount.toLocaleString();
+                
+                // Добавляем анимацию при обновлении счетчика
+                const counter = document.getElementById('viewCounter');
+                counter.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    counter.style.transform = 'scale(1)';
+                }, 300);
+            }
+            
+            // Запускаем счетчик при загрузке страницы
+            updateViewCounter();
+            
+            // Дополнительная анимация для счетчика при наведении
+            const viewCounter = document.getElementById('viewCounter');
+            viewCounter.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-2px)';
+                this.style.boxShadow = '0 6px 20px rgba(74, 158, 255, 0.5)';
+            });
+            
+            viewCounter.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            });
+            
+            // Показываем всплывающую подсказку при клике
+            viewCounter.addEventListener('click', function() {
+                const viewCount = localStorage.getItem('portfolioViewCount');
+                alert(`Этот сайт посмотрели уже ${viewCount} раз(а)! Спасибо за интерес к моему портфолио! ✨`);
+            });
         });
     </script>
 </body>
