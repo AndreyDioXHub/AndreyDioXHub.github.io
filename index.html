@@ -307,10 +307,34 @@
             border: 1px solid var(--border-color);
         }
 
-        .video-container iframe {
+        .video-container iframe,
+        .video-container video {
             width: 100%;
             height: 315px;
             border: none;
+            display: block;
+        }
+
+        .video-container video {
+            background-color: #000;
+        }
+
+        .video-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .video-note {
+            margin-top: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-style: italic;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
         }
 
         footer {
@@ -395,7 +419,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .video-container iframe {
+            .video-container iframe,
+            .video-container video {
                 height: 250px;
             }
         }
@@ -447,30 +472,39 @@
             <div class="card">
                 <h3>Видео-презентация</h3>
                 <p>Немного о моих подходах к разработке и профессиональном опыте:</p>
+                
+                <!-- Локальный видео-плеер -->
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/watch?v=_MX6L8Cjzjs" 
-                            title="Видео о разработчике" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
+                    <video id="local-video" controls poster="video-poster.jpg">
+                        <source src="presentation.mp4" type="video/mp4">
+                        <source src="presentation.webm" type="video/webm">
+                        Ваш браузер не поддерживает воспроизведение видео.
+                        Вы можете <a href="presentation.mp4">скачать видео</a> для просмотра.
+                    </video>
                 </div>
                 
-                <div class="experience-item">
+                <!-- Альтернатива: YouTube видео -->
+                <div class="video-note">
+                    <p><i class="fas fa-info-circle"></i> Если локальное видео не загружается, вы можете посмотреть его на YouTube:</p>
+                    <div class="video-options">
+                        <a href="https://youtube.com/watch?v=_MX6L8Cjzjs" class="btn" target="_blank">
+                            <i class="fab fa-youtube"></i> Смотреть на YouTube
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Краткое описание -->
+                <div class="experience-item" style="margin-top: 25px; border-bottom: none;">
                     <p>Я сеньор C# Developer с опытом разработки мобильных игр на Unity3D. Моя специализация включает создание игровых механик, работу с UI, оптимизацию кода и улучшение физики игровых объектов. Я обладаю глубоким пониманием клиент-серверного взаимодействия и принципов разработки мультиплеерных игр.</p>
-                
-                <p style="margin-top: 15px;">Мой подход к работе основан на организованности, внимании к деталям и стремлении к постоянному улучшению качества кода. Я легко адаптируюсь к новым задачам и технологиям, а также эффективно работаю в команде, используя Agile-методики.</p>
-                
-                <p style="margin-top: 15px;">Я ценю возможность работать над интересными проектами, где можно применять свои навыки и учиться у опытных коллег. Для меня важно быть частью команды, которая разделяет страсть к созданию качественных игр и открыта к обратной связи.</p>
-                
-                <div class="project-links" style="margin-top: 30px;">
-                    <a href="https://github.com/AndreyDioXHub" class="btn" target="_blank">
-                        <i class="fab fa-github"></i> Мой GitHub
-                    </a>
-                    <a href="https://t.me/Czeeep" class="btn btn-outline" target="_blank">
-                        <i class="fab fa-telegram"></i> Telegram
-                    </a>
-                </div>
+                    
+                    <div class="project-links" style="margin-top: 25px;">
+                        <a href="https://github.com/AndreyDioXHub" class="btn" target="_blank">
+                            <i class="fab fa-github"></i> Мой GitHub
+                        </a>
+                        <a href="https://t.me/Czeeep" class="btn btn-outline" target="_blank">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                    </div>
                 </div>
             </div>    
         </div>
@@ -686,5 +720,44 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Простой скрипт для улучшения работы с видео
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('local-video');
+            
+            // Автоматическая настройка видео при загрузке
+            if (video) {
+                // Установка атрибутов для лучшей производительности
+                video.setAttribute('preload', 'metadata');
+                
+                // Обработчик для показа состояния загрузки
+                video.addEventListener('loadeddata', function() {
+                    console.log('Видео загружено и готово к воспроизведению');
+                });
+                
+                // Обработчик ошибок
+                video.addEventListener('error', function() {
+                    console.log('Ошибка загрузки видео. Проверьте путь к файлу.');
+                    const videoContainer = video.parentElement;
+                    const errorMessage = document.createElement('div');
+                    errorMessage.innerHTML = `
+                        <div class="video-note" style="background-color: rgba(255, 0, 0, 0.1);">
+                            <p><i class="fas fa-exclamation-triangle"></i> Не удалось загрузить локальное видео. Убедитесь, что файл <strong>presentation.mp4</strong> находится в той же папке, что и index.html</p>
+                            <div class="video-options">
+                                <a href="https://youtube.com/watch?v=_MX6L8Cjzjs" class="btn" target="_blank">
+                                    <i class="fab fa-youtube"></i> Смотреть на YouTube
+                                </a>
+                                <a href="presentation.mp4" class="btn btn-outline" download>
+                                    <i class="fas fa-download"></i> Скачать видео
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    videoContainer.parentNode.insertBefore(errorMessage, videoContainer.nextSibling);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
