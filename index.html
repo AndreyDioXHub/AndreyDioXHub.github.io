@@ -382,28 +382,17 @@
             width: 100%;
             background: #000;
             border: 2px solid #f65c01;
-        }
-        .video-wrapper video {
-            width: 100%;
-            display: block;
-        }
-        .video-fallback {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border: 2px solid #f65c01;
-            aspect-ratio: 16 / 9; /* фиксирует пропорции 16:9 */
+            aspect-ratio: 16 / 9;
         }
         .video-wrapper video {
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: contain; /* покажет всё видео с чёрными полосами, если оно не 16:9 */
-            /* object-fit: cover; — если нужно заполнить контейнер без полос (с обрезкой) */
+            object-fit: contain;
+        }
+        .video-fallback {
+            text-align: center;
+            margin-top: 1rem;
         }
 
         @media (max-width: 750px) {
@@ -478,12 +467,12 @@
         <!-- Слайдер скриншотов -->
         <div class="slider-container">
             <div class="slider-track" id="sliderTrackRu">
-                <div class="slider-slide"><img src="img 1.png" alt="геймплей"><div class="slider-caption">Скриншот 1</div></div>
-                <div class="slider-slide"><img src="img 2.png" alt="геймплей"><div class="slider-caption">Скриншот 2</div></div>
-                <div class="slider-slide"><img src="img 3.png" alt="геймплей"><div class="slider-caption">Скриншот 3</div></div>
-                <div class="slider-slide"><img src="img 4.png" alt="геймплей"><div class="slider-caption">Скриншот 4</div></div>
-                <div class="slider-slide"><img src="img 5.png" alt="геймплей"><div class="slider-caption">Скриншот 5</div></div>
-                <div class="slider-slide"><img src="img 6.png" alt="геймплей"><div class="slider-caption">Скриншот 6</div></div>
+                <div class="slider-slide"><img src="img 1.png" alt="геймплей"><div class="slider-caption">Скриншот 1 - Zombie Rampage</div></div>
+                <div class="slider-slide"><img src="img 2.png" alt="геймплей"><div class="slider-caption">Скриншот 2 - Большой город</div></div>
+                <div class="slider-slide"><img src="img 3.png" alt="геймплей"><div class="slider-caption">Скриншот 3 - Зомби</div></div>
+                <div class="slider-slide"><img src="img 4.png" alt="геймплей"><div class="slider-caption">Скриншот 4 - Лут в каждом здании</div></div>
+                <div class="slider-slide"><img src="img 5.png" alt="геймплей"><div class="slider-caption">Скриншот 5 - Битва с боссом</div></div>
+                <div class="slider-slide"><img src="img 6.png" alt="геймплей"><div class="slider-caption">Скриншот 6 - Инвентарь как в батл рояль</div></div>
             </div>
             <button class="slider-btn prev" id="prevBtnRu">‹</button>
             <button class="slider-btn next" id="nextBtnRu">›</button>
@@ -494,11 +483,11 @@
         <h2>🎮 Референсы</h2>
         <div class="slider-container">
             <div class="slider-track" id="sliderRefRu">
-                <div class="slider-slide"><img src="scrn 1.png" alt="референс"><div class="slider-caption">Референс 1</div></div>
-                <div class="slider-slide"><img src="scrn 2.png" alt="референс"><div class="slider-caption">Референс 2</div></div>
-                <div class="slider-slide"><img src="scrn 3.png" alt="референс"><div class="slider-caption">Референс 3</div></div>
-                <div class="slider-slide"><img src="scrn 4.png" alt="референс"><div class="slider-caption">Референс 4</div></div>
-                <div class="slider-slide"><img src="scrn 5.png" alt="референс"><div class="slider-caption">Референс 5</div></div>
+                <div class="slider-slide"><img src="scrn 1.png" alt="референс"><div class="slider-caption">Референс 1 - Burglin' Gnomes</div></div>
+                <div class="slider-slide"><img src="scrn 2.png" alt="референс"><div class="slider-caption">Референс 2 - REPO</div></div>
+                <div class="slider-slide"><img src="scrn 3.png" alt="референс"><div class="slider-caption">Референс 3 - Spicies unknown</div></div>
+                <div class="slider-slide"><img src="scrn 4.png" alt="референс"><div class="slider-caption">Референс 4 - Apex Legends</div></div>
+                <div class="slider-slide"><img src="scrn 5.png" alt="референс"><div class="slider-caption">Референс 5 - PUBG</div></div>
             </div>
             <button class="slider-btn prev" id="prevRefRu">‹</button>
             <button class="slider-btn next" id="nextRefRu">›</button>
@@ -507,7 +496,8 @@
 
         <section id="concept">
             <h2>🧠 Концепция проекта</h2>
-            <p><strong>Рабочее название:</strong> Zombie Rampage &nbsp;|&nbsp; <strong>Жанр:</strong> Кооперативный зомби-шутер с выживанием, открытым миром и RPG-элементами</p>
+            <h2>Рабочее название - Zombie Rampage</h2>
+            <p><strong>Жанр:</strong> Кооперативный зомби-шутер с выживанием и "открытым миром"</p>
             <p><strong>Платформа:</strong> ПК (Steam)</p>
             <div class="feature-grid">
                 <div class="feature-item">👥 Отряд до 4 игроков выполняет миссии на открытой локации города.</div>
@@ -523,14 +513,14 @@
             <div class="pixel-card">
                 <ul>
                     <li>✅ Базовая сетевая инфраструктура (кооператив до 4 игроков).</li>
-                    <li>✅ Основные механики: здоровье, поднятие из нокаута, воскрешение, экстракторы, инвентарь, оружие (18 стволов), спавн предметов.</li>
+                    <li>✅ Основные механики: Стрельба, нокаут, поднятие из нокаута, воскрешение, инвентарь, оружие (18 стволов), сетевая синхронизация предметов, простые метки.</li>
                     <li>✅ Базовый ИИ зомби, система распределения ботов по игрокам.</li>
-                    <li>✅ Экраны здоровья, инвентаря, оружия, простые метки.</li>
-                    <li>✅ Часть графического контента (иконки, интерфейс) готова.</li>
+                    <li>✅ Часть графического контента (иконки, интерфейс)</li>
                 </ul>
                 <p><strong>Итог:</strong> Согласно декомпозиции игра готова на треть. Осталось довести контент, оптимизировать производительность, добавить всех врагов и боссов, провести полировку и тестирование.</p>
                 <div style="margin-top: 1rem;">
-                    <a href="https://docs.google.com/spreadsheets/d/1pDWc2KZOUT6x05wJ8Ly7rlXjnBFhU8BVcHpF_G4SRB8/edit?usp=sharing" class="button-outline" id="gdocLinkRu">📊 Полная таблица задач (Google Sheets)</a>
+                    <a href="#" class="button-outline" id="gdocLinkRu">📊 Полная таблица задач (Google Sheets)</a>
+                     <a href="#" class="button-outline" id="buildLinkRu" style="margin-left: 1rem;">💾 Ссылка на билд</a>
                 </div>
             </div>
         </section>
@@ -587,10 +577,10 @@
             <h2>⏱️ Сроки завершения</h2>
             <p>При полной занятости и своевременном финансировании проект будет завершён через <strong>6 месяцев</strong>.<br>Декомпозиция: ~2000 человеко-часов.</p>
             <div class="blocks-grid">
-                <div class="block"><h4>🏙️ Блок 1. Мир и окружение</h4><strong>550+ ч</strong><ul><li>Стриминг города, LOD, NavMesh</li><li>Интерактивные двери (137 зданий), окна</li><li>Багажники машин (4 типа лута)</li><li>Система ключ-карт, walkable mesh</li><li>Расстановка предметов и врагов</li></ul></div>
-                <div class="block"><h4>🧟 Блок 2. Враги и боссы</h4><strong>770+ ч</strong><ul><li>4 новых типа зомби (клещи, собаки, автоматчики, кроты)</li><li>5 уникальных боссов</li><li>Анимации, звуки, ИИ, полоска здоровья</li></ul></div>
-                <div class="block"><h4>🖥️ Блок 3. Системы и UI</h4><strong>450+ ч</strong><ul><li>Сетевая синхронизация</li><li>Редактор персонажа</li><li>Главное меню, лобби, настройки</li><li>Аудиосистема</li></ul></div>
-                <div class="block"><h4>🧹 Блок 4. Полировка, тестирование</h4><strong>400+ ч</strong><ul><li>Альфа/бета-тесты</li><li>Исправление багов, оптимизация</li><li>Steamworks, локализация</li><li>Подготовка Steam-страницы</li></ul></div>
+                <div class="block"><h4>🏙️ Блок 1. Мир и окружение</h4><strong>550+ ч</strong><ul><li>Наполнение</li><li>Расстановка предметов и врагов</li><li>Система ключ-карт</li><li>Оптимизация</li></ul></div>
+                <div class="block"><h4>🧟 Блок 2. Враги и боссы</h4><strong>770+ ч</strong><ul><li>4 новых типа зомби</li><li>5 уникальных боссов</li><li>Анимации, звуки, ИИ</li></ul></div>
+                <div class="block"><h4>🖥️ Блок 3. Системы и UI</h4><strong>450+ ч</strong><ul><li>Главное меню, лобби, настройки</li><li>Редактор персонажа</li></ul></div>
+                <div class="block"><h4>🧹 Блок 4. Полировка, тестирование</h4><strong>400+ ч</strong><ul><li>Альфа/бета-тесты</li><li>Исправление багов, оптимизация</li></ul></div>
             </div>
         </section>
 
@@ -622,12 +612,12 @@
         </section>
 
         <footer>
-            ⚡ Zombie Rampage — кооперативный шутер от российской команды. Демо и NDA по запросу.
+            ⚡ Zombie Rampage — кооперативный шутер от российской команды.
         </footer>
     </main>
 </div>
 
-<!-- Английская версия -->
+<!-- Английская версия (полностью синхронизирована с русской) -->
 <div id="en-content" class="lang-en">
     <main class="container">
         <!-- Video block with presentation.mp4 -->
@@ -646,12 +636,12 @@
         <!-- Slider screenshots -->
         <div class="slider-container">
             <div class="slider-track" id="sliderTrackEn">
-                <div class="slider-slide"><img src="img 1.png" alt="gameplay"><div class="slider-caption">Screenshot 1</div></div>
-                <div class="slider-slide"><img src="img 2.png" alt="gameplay"><div class="slider-caption">Screenshot 2</div></div>
-                <div class="slider-slide"><img src="img 3.png" alt="gameplay"><div class="slider-caption">Screenshot 3</div></div>
-                <div class="slider-slide"><img src="img 4.png" alt="gameplay"><div class="slider-caption">Screenshot 4</div></div>
-                <div class="slider-slide"><img src="img 5.png" alt="gameplay"><div class="slider-caption">Screenshot 5</div></div>
-                <div class="slider-slide"><img src="img 6.png" alt="gameplay"><div class="slider-caption">Screenshot 6</div></div>
+                <div class="slider-slide"><img src="img 1.png" alt="gameplay"><div class="slider-caption">Screenshot 1 - Zombie Rampage</div></div>
+                <div class="slider-slide"><img src="img 2.png" alt="gameplay"><div class="slider-caption">Screenshot 2 - Big city</div></div>
+                <div class="slider-slide"><img src="img 3.png" alt="gameplay"><div class="slider-caption">Screenshot 3 - Zombie</div></div>
+                <div class="slider-slide"><img src="img 4.png" alt="gameplay"><div class="slider-caption">Screenshot 4 - Loot in every building</div></div>
+                <div class="slider-slide"><img src="img 5.png" alt="gameplay"><div class="slider-caption">Screenshot 5 - Boss fight</div></div>
+                <div class="slider-slide"><img src="img 6.png" alt="gameplay"><div class="slider-caption">Screenshot 6 - Inventory like in Battle Royale</div></div>
             </div>
             <button class="slider-btn prev" id="prevBtnEn">‹</button>
             <button class="slider-btn next" id="nextBtnEn">›</button>
@@ -662,11 +652,11 @@
         <h2>🎮 References</h2>
         <div class="slider-container">
             <div class="slider-track" id="sliderRefEn">
-                <div class="slider-slide"><img src="scrn 1.png" alt="reference"><div class="slider-caption">Reference 1</div></div>
-                <div class="slider-slide"><img src="scrn 2.png" alt="reference"><div class="slider-caption">Reference 2</div></div>
-                <div class="slider-slide"><img src="scrn 3.png" alt="reference"><div class="slider-caption">Reference 3</div></div>
-                <div class="slider-slide"><img src="scrn 4.png" alt="reference"><div class="slider-caption">Reference 4</div></div>
-                <div class="slider-slide"><img src="scrn 5.png" alt="reference"><div class="slider-caption">Reference 5</div></div>
+                <div class="slider-slide"><img src="scrn 1.png" alt="reference"><div class="slider-caption">Reference 1 - Burglin' Gnomes</div></div>
+                <div class="slider-slide"><img src="scrn 2.png" alt="reference"><div class="slider-caption">Reference 2 - REPO</div></div>
+                <div class="slider-slide"><img src="scrn 3.png" alt="reference"><div class="slider-caption">Reference 3 - Spicies unknown</div></div>
+                <div class="slider-slide"><img src="scrn 4.png" alt="reference"><div class="slider-caption">Reference 4 - Apex Legends</div></div>
+                <div class="slider-slide"><img src="scrn 5.png" alt="reference"><div class="slider-caption">Reference 5 - PUBG</div></div>
             </div>
             <button class="slider-btn prev" id="prevRefEn">‹</button>
             <button class="slider-btn next" id="nextRefEn">›</button>
@@ -675,7 +665,8 @@
 
         <section id="concept">
             <h2>🧠 Project Concept</h2>
-            <p><strong>Working title:</strong> Zombie Rampage &nbsp;|&nbsp; <strong>Genre:</strong> Cooperative zombie shooter with survival, open world & RPG elements</p>
+            <h2>Working title - Zombie Rampage</h2>
+            <p><strong>Genre:</strong> Cooperative zombie shooter with survival and "open world"</p>
             <p><strong>Platform:</strong> PC (Steam)</p>
             <div class="feature-grid">
                 <div class="feature-item">👥 Squad of up to 4 players completing missions in an open city location.</div>
@@ -691,14 +682,14 @@
             <div class="pixel-card">
                 <ul>
                     <li>✅ Core network infrastructure (co-op up to 4 players).</li>
-                    <li>✅ Core mechanics: health, revive, resurrection, extractors, inventory, weapons (18 guns), item spawning.</li>
+                    <li>✅ Core mechanics: shooting, knockout, revive from knockout, resurrection, inventory, weapons (18 guns), network item sync, simple pings.</li>
                     <li>✅ Basic zombie AI, bot distribution system.</li>
-                    <li>✅ Health UI, inventory, weapon screen, simple pings.</li>
                     <li>✅ Part of graphic assets (icons, UI) ready.</li>
                 </ul>
                 <p><strong>Result:</strong> According to the breakdown, the game is one‑third complete. Remaining: content polish, performance optimization, adding all planned enemies and bosses, polishing and testing.</p>
                 <div style="margin-top: 1rem;">
                     <a href="#" class="button-outline" id="gdocLinkEn">📊 Full task breakdown (Google Sheets)</a>
+                    <a href="#" class="button-outline" id="buildLinkEn" style="margin-left: 1rem;">💾 Build link</a>
                 </div>
             </div>
         </section>
@@ -706,9 +697,9 @@
         <section id="team">
             <h2>👾 Team</h2>
             <div class="team-grid">
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo alexey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Alexey Parnikov</h3><div class="role">Programmer, Technical Designer</div><div>6 years in Unity</div><div>Projects: Commercial car assembly sim, Next-Bot</div></div>
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo andrey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Andrey Ogrebo</h3><div class="role">Programmer, Tech Artist, 3D Artist, Game Designer</div><div>6 years in Unity</div><div>Projects: Commercial car sim, Next-Bot, Roblox builder, Those Who Remain</div></div>
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo arina.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Arina Sinitsyna</h3><div class="role">Designer</div><div>3 year experience</div><div>Projects: work for hire</div></div>
+                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo alexey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Alexey Parnikov</h3><div class="role">Programmer, Technical Designer</div><div>15 years in Unity</div><div>Projects: Commercial car assembly sim, Next-Bot</div></div>
+                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo andrey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Andrey Ogrebo</h3><div class="role">Programmer, Tech Artist, 3D Artist, Game Designer</div><div>10 years in Unity</div><div>Projects: Commercial car sim, Next-Bot, Roblox builder, Those Who Remain</div></div>
+                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo arina.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Arina Sinitsyna</h3><div class="role">Designer</div><div>3 years experience</div><div>Projects: work for hire</div></div>
                 <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo pavel.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Pavel Maximov</h3><div class="role">Programmer</div><div>1 year experience</div><div>Projects: Roblox builder</div></div>
             </div>
             <p style="text-align: center;"><strong>5 years of joint development experience</strong></p>
@@ -725,10 +716,10 @@
             <h2>⏱️ Timeline</h2>
             <p>With full‑time work and timely funding, the project will be completed in <strong>6 months</strong>.<br>Detailed breakdown: ~2000 person‑hours remain.</p>
             <div class="blocks-grid">
-                <div class="block"><h4>🏙️ Block 1. World & Environment</h4><strong>550+ hours</strong><ul><li>City streaming, LOD, NavMesh</li><li>Interactive doors (137 buildings), breakable windows</li><li>Car trunks loot (4 types)</li><li>Keycard system, walkable mesh</li><li>Placement of items & enemies</li></ul></div>
-                <div class="block"><h4>🧟 Block 2. Enemies & Bosses</h4><strong>770+ hours</strong><ul><li>4 new zombie types (tick, dog, soldier, mole)</li><li>5 unique bosses (Fat Willy, Swarm, Lily, Bruno, Whisper)</li><li>Animations, sounds, AI, boss health bar</li></ul></div>
-                <div class="block"><h4>🖥️ Block 3. Systems & UI</h4><strong>450+ hours</strong><ul><li>Network sync optimization</li><li>Character editor (mixable parts)</li><li>Main menu, lobby, end screen, settings</li><li>Full audio system (music, ambience)</li></ul></div>
-                <div class="block"><h4>🧹 Block 4. Polish & QA</h4><strong>400+ hours</strong><ul><li>Alpha/beta tests with external players</li><li>Bug fixing, performance</li><li>Steamworks integration (achievements, cloud)</li><li>Localization, Steam page assets</li></ul></div>
+                <div class="block"><h4>🏙️ Block 1. World & Environment</h4><strong>550+ hours</strong><ul><li>Filling</li><li>Placement of items and enemies</li><li>Keycard system</li><li>Optimization</li></ul></div>
+                <div class="block"><h4>🧟 Block 2. Enemies & Bosses</h4><strong>770+ hours</strong><ul><li>4 new zombie types</li><li>5 unique bosses</li><li>Animations, sounds, AI</li></ul></div>
+                <div class="block"><h4>🖥️ Block 3. Systems & UI</h4><strong>450+ hours</strong><ul><li>Main menu, lobby, settings</li><li>Character editor</li></ul></div>
+                <div class="block"><h4>🧹 Block 4. Polish & QA</h4><strong>400+ hours</strong><ul><li>Alpha/beta tests</li><li>Bug fixing, optimization</li></ul></div>
             </div>
         </section>
 
@@ -736,7 +727,7 @@
             <h2>💰 Why $30,000?</h2>
             <div class="pixel-card">
                 <ul>
-                    <li>Minimum amount to keep the team full‑time for 6 months without side jobs.</li>
+                    <li>Minimum amount to keep the team full‑time for 6 months.</li>
                     <li>Localization, marketing, Steam page expenses to be covered by publisher as partner.</li>
                 </ul>
             </div>
@@ -757,7 +748,7 @@
                 <hr><p>✔️ $30,000 goes exclusively to development (3‑person salary for 6 months).<br>✔️ Marketing, localization, Steam page — handled by publisher as partner.</p>
             </div>
         </section>
-        <footer>⚡ Zombie Rampage — cooperative open‑world shooter by a Russian team. Demo & NDA available upon request.</footer>
+        <footer>⚡ Zombie Rampage — cooperative open‑world shooter by a Russian team.</footer>
     </main>
 </div>
 
@@ -884,7 +875,7 @@
 
     // Ссылки
     const fakeUrl = 'https://docs.google.com/spreadsheets/d/1pDWc2KZOUT6x05wJ8Ly7rlXjnBFhU8BVcHpF_G4SRB8/edit?usp=sharing';
-    const fakeBuild = 'https://drive.google.com/drive/folders/XXXXXXXXXX';
+    const fakeBuild = 'https://drive.google.com/file/d/1WafIwWv5BgvxpS0aSl7-dxQyPs2ib7VT/view?usp=sharing';
     const gdocRu = document.getElementById('gdocLinkRu');
     const gdocEn = document.getElementById('gdocLinkEn');
     const buildRu = document.getElementById('buildLinkRu');
