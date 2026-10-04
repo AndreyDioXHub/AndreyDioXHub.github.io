@@ -1,891 +1,707 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Zombie Rampage — питч издателю</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Default Zombie Shooter — Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #c39a65;
+    --bg-dark: #a88453;
+    --btn: #15162a;
+    --btn-hover: #2a2d52;
+    --white: #ffffff;
+    --accent: #ff4757;
+    --accent-dark: #c0392b;
+    --text: #15162a;
+    --shadow: #15162a;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-        body {
-            background-color: #15162a;
-            color: #ffffff;
-            font-family: 'Courier New', 'VT323', monospace;
-            font-size: 18px;
-            line-height: 1.5;
-            padding-top: 70px;
-        }
+body {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    line-height: 1.5;
+    background-color: var(--bg);
+    color: var(--text);
+    image-rendering: pixelated;
+    overflow-x: hidden;
+}
 
-        /* header */
-        .sticky-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #0a0b1f;
-            border-bottom: 2px solid #f65c01;
-            padding: 12px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .burger-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 22px;
-            padding: 0;
-            z-index: 1001;
-        }
-        .burger-btn span {
-            display: block;
-            height: 3px;
-            background: #f65c01;
-            width: 100%;
-            transition: 0.2s;
-        }
-        .nav-menu {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            background: #0a0b1f;
-            width: 100%;
-            max-width: 280px;
-            border-right: 2px solid #f65c01;
-            border-bottom: 2px solid #f65c01;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            z-index: 999;
-            padding: 1rem 0;
-        }
-        .nav-menu.open {
-            transform: translateX(0);
-        }
-        .nav-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .nav-menu li a {
-            display: block;
-            padding: 12px 24px;
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            border-bottom: 1px solid #2c2e4e;
-            transition: 0.1s;
-        }
-        .nav-menu li a:hover {
-            background: #f65c01;
-            color: #15162a;
-            padding-left: 32px;
-        }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .contacts {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-        .contacts a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.95rem;
-            border: 1px solid #f65c01;
-            padding: 6px 12px;
-            transition: 0.1s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.3);
-        }
-        .contacts a:hover {
-            background: #f65c01;
-            color: #15162a;
-            transform: translate(-1px, -1px);
-        }
-        .lang-switch {
-            display: flex;
-            gap: 8px;
-        }
-        .lang-switch button {
-            background: transparent;
-            border: 1px solid #f65c01;
-            color: white;
-            padding: 6px 14px;
-            cursor: pointer;
-            font-family: monospace;
-            font-size: 1rem;
-            transition: 0.1s;
-        }
-        .lang-switch button.active {
-            background: #f65c01;
-            color: #15162a;
-            font-weight: bold;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.03), rgba(0,0,0,0.03) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+    z-index: 9999;
+}
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.pixel-font { font-family: 'Press Start 2P', 'Silkscreen', cursive; }
+.silkscreen { font-family: 'Silkscreen', cursive; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        h2 {
-            font-size: 2rem;
-            border-left: 6px solid #f65c01;
-            padding-left: 20px;
-            margin: 2rem 0 1.5rem 0;
-            scroll-margin-top: 80px;
-        }
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #f65c01;
-        }
-        strong, b {
-            font-weight: bold;
-            color: #f65c01;
-        }
+/* HEADER */
+header {
+    position: sticky; top: 0; background: var(--btn);
+    border-bottom: 4px solid var(--white); z-index: 1000;
+    box-shadow: 0 4px 0 var(--shadow);
+}
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 20px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px;
+}
+.logo {
+    font-family: 'Press Start 2P', cursive; color: var(--accent);
+    font-size: 14px; text-shadow: 2px 2px 0 var(--white); letter-spacing: 1px;
+}
+.nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-links a {
+    color: var(--white); text-decoration: none; font-family: 'Silkscreen', cursive;
+    font-size: 16px; padding: 6px 12px; border: 2px solid var(--white);
+    background: var(--btn); transition: all 0.15s;
+}
+.nav-links a:hover {
+    background: var(--accent); transform: translate(-2px, -2px); box-shadow: 2px 2px 0 var(--white);
+}
 
-        .feature-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .feature-item {
-            background: rgba(0,0,0,0.3);
-            border-left: 4px solid #f65c01;
-            padding: 1rem;
-            flex: 1 1 220px;
-        }
+/* HERO */
+.hero {
+    text-align: center; padding: 80px 20px 60px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-dark) 100%);
+    border-bottom: 4px solid var(--shadow);
+}
+.hero h1 {
+    font-family: 'Press Start 2P', cursive; font-size: 42px; color: var(--white);
+    text-shadow: 4px 4px 0 var(--shadow), 8px 8px 0 var(--accent);
+    margin-bottom: 20px; letter-spacing: 2px; line-height: 1.4; word-break: break-word;
+}
+.hero .tagline { font-family: 'Silkscreen', cursive; font-size: 28px; color: var(--btn); margin-bottom: 40px; }
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-        /* team */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .team-member {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #f65c01;
-            padding: 1.5rem;
-            text-align: center;
-            position: relative;
-        }
-        .avatar-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 1rem auto;
-        }
-        .avatar-square {
-            width: 100%;
-            height: 100%;
-            background: #2c2e4e;
-            border: 2px solid #f65c01;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .avatar-square img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .tricolor {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            width: 40px;
-            height: 24px;
-            background: linear-gradient(to bottom, #ffffff 33%, #0039a6 33%, #0039a6 66%, #d52b1e 66%);
-            border: 1px solid #000;
-            pointer-events: none;
-            z-index: 2;
-        }
-        .team-member h3 {
-            margin: 0.5rem 0 0.2rem;
-            font-size: 1.5rem;
-        }
-        .role {
-            color: #f65c01;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
+/* BUTTONS */
+.btn {
+    display: inline-block; padding: 16px 32px; font-family: 'Press Start 2P', cursive;
+    font-size: 14px; text-decoration: none; border: 3px solid var(--white);
+    cursor: pointer; transition: all 0.1s; background: var(--btn); color: var(--white);
+    box-shadow: 4px 4px 0 var(--shadow); text-align: center;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); background: var(--btn-hover); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--shadow); }
+.btn-accent { background: var(--accent); }
+.btn-accent:hover { background: var(--accent-dark); }
 
-        .blocks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin: 2rem 0;
-        }
-        .block {
-            background: rgba(0, 0, 0, 0.35);
-            border-top: 6px solid #f65c01;
-            padding: 1.2rem;
-        }
-        .block h4 {
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
-        }
-        .block ul {
-            padding-left: 1.2rem;
-            margin: 1rem 0;
-        }
-        .block li {
-            margin-bottom: 0.4rem;
-            font-size: 1rem;
-        }
+/* VIDEO */
+.video-section { padding: 60px 20px; background: var(--bg); }
+.video-wrapper {
+    max-width: 960px; margin: 0 auto; border: 4px solid var(--white);
+    box-shadow: 8px 8px 0 var(--shadow); background: var(--btn); padding: 8px;
+}
+.video-wrapper video { width: 100%; display: block; aspect-ratio: 16/9; background: #000; }
 
-        .pixel-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid #f65c01;
-            padding: 1.5rem;
-            margin: 1rem 0;
-        }
-        .offer-split {
-            background: rgba(246, 92, 1, 0.15);
-            padding: 1.5rem;
-            border: 2px solid #f65c01;
-            margin: 2rem 0;
-        }
-        .button-outline {
-            display: inline-block;
-            border: 2px solid #f65c01;
-            padding: 8px 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            background: transparent;
-            margin-top: 1rem;
-            transition: all 0.15s ease;
-        }
-        .button-outline:hover {
-            background: #f65c01;
-            color: #15162a;
-            transform: translate(-2px, -2px);
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-        }
-        hr {
-            border: none;
-            height: 2px;
-            background: #f65c01;
-            margin: 1rem 0;
-        }
-        footer {
-            text-align: center;
-            margin: 3rem 0 2rem;
-            font-size: 1rem;
-            opacity: 0.8;
-        }
+/* SECTIONS */
+section.content-section { padding: 60px 20px; border-top: 4px solid var(--shadow); background: var(--bg); }
+section.content-section:nth-of-type(even) { background: var(--bg-dark); }
+.section-title {
+    font-family: 'Press Start 2P', cursive; font-size: 24px; color: var(--white);
+    text-shadow: 3px 3px 0 var(--shadow); margin-bottom: 30px; text-align: center; line-height: 1.6;
+}
+.section-title::before { content: ">> "; color: var(--accent); }
+.section-title::after { content: " <<"; color: var(--accent); }
 
-        /* slider (общие стили) */
-        .slider-container {
-            position: relative;
-            max-width: 100%;
-            margin: 2rem 0;
-            overflow: hidden;
-            border: 2px solid #f65c01;
-            background: #0f1022;
-        }
-        .slider-track {
-            display: flex;
-            transition: transform 0.4s ease;
-        }
-        .slider-slide {
-            min-width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            text-align: center;
-        }
-        .slider-slide img {
-            width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            border: 1px solid #f65c01;
-            display: block;
-            margin: 0 auto;
-        }
-        .slider-caption {
-            margin-top: 8px;
-            font-size: 1rem;
-            color: #f65c01;
-        }
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.7);
-            border: 2px solid #f65c01;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0 12px;
-            z-index: 2;
-            font-family: monospace;
-        }
-        .slider-btn:hover {
-            background: #f65c01;
-            color: #15162a;
-        }
-        .prev {
-            left: 10px;
-        }
-        .next {
-            right: 10px;
-        }
-        .slider-dots {
-            text-align: center;
-            margin: 12px 0 8px;
-        }
-        .dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #444;
-            margin: 0 5px;
-            cursor: pointer;
-            border: 1px solid #f65c01;
-        }
-        .dot.active {
-            background: #f65c01;
-        }
+/* CARDS & STATS */
+.pixel-card {
+    background: var(--white); border: 4px solid var(--btn); padding: 30px;
+    margin-bottom: 20px; box-shadow: 6px 6px 0 var(--shadow); position: relative;
+}
+.pixel-card h3 { font-family: 'Press Start 2P', cursive; font-size: 14px; color: var(--accent); margin-bottom: 15px; line-height: 1.5; }
+.pixel-card p { color: var(--text); line-height: 1.6; font-size: 24px; }
+.pixel-card ul { list-style: none; padding: 0; }
+.pixel-card ul li { padding: 8px 0 8px 30px; position: relative; font-size: 22px; }
+.pixel-card ul li::before { content: ">"; position: absolute; left: 0; color: var(--accent); font-family: 'Press Start 2P', cursive; font-size: 16px; }
 
-        /* video block */
-        .video-container {
-            margin: 2rem 0;
-        }
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border: 2px solid #f65c01;
-            aspect-ratio: 16 / 9;
-        }
-        .video-wrapper video {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: contain;
-        }
-        .video-fallback {
-            text-align: center;
-            margin-top: 1rem;
-        }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 30px 0; }
+.stat-box {
+    background: var(--btn); color: var(--white); border: 4px solid var(--white);
+    padding: 24px; text-align: center; box-shadow: 6px 6px 0 var(--shadow);
+}
+.stat-box .number { font-family: 'Press Start 2P', cursive; font-size: 32px; color: var(--accent); display: block; margin-bottom: 10px; }
+.stat-box .label { font-family: 'Silkscreen', cursive; font-size: 20px; line-height: 1.3; }
 
-        @media (max-width: 750px) {
-            body {
-                font-size: 16px;
-                padding-top: 65px;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .avatar-wrapper {
-                width: 110px;
-                height: 110px;
-            }
-            .sticky-header {
-                padding: 8px 16px;
-            }
-            .header-right {
-                gap: 12px;
-            }
-            .contacts a {
-                font-size: 0.8rem;
-                padding: 4px 8px;
-            }
-        }
-        .lang-ru, .lang-en {
-            display: none;
-        }
-        .lang-ru.active-lang, .lang-en.active-lang {
-            display: block;
-        }
-    </style>
+/* TEAM */
+.team-section { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; justify-content: center; }
+.team-photo {
+    width: 200px; height: 200px; border: 4px solid var(--white);
+    box-shadow: 6px 6px 0 var(--shadow); object-fit: cover; image-rendering: pixelated; flex-shrink: 0;
+}
+.team-info { flex: 1; min-width: 300px; }
+
+/* SLIDER */
+.slider-wrapper { max-width: 1100px; margin: 0 auto; }
+.slider-main { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.slider-stage {
+    flex: 1; position: relative; background: var(--btn); border: 4px solid var(--white);
+    box-shadow: 6px 6px 0 var(--shadow); overflow: hidden; aspect-ratio: 16/9; cursor: pointer;
+}
+.slider-main-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s ease; }
+.slider-main-img.loading { opacity: 0.3; }
+.slider-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(21, 22, 42, 0.95) 40%);
+    padding: 30px 24px 18px; color: var(--white);
+}
+.slider-caption h3 { font-family: 'Press Start 2P', cursive; font-size: 14px; color: var(--accent); margin-bottom: 8px; line-height: 1.4; text-shadow: 2px 2px 0 #000; }
+.slider-caption p { font-family: 'VT323', monospace; font-size: 22px; line-height: 1.3; text-shadow: 1px 1px 0 #000; }
+.slider-arrow {
+    background: var(--btn); color: var(--white); border: 4px solid var(--white);
+    width: 60px; height: 60px; font-family: 'Press Start 2P', cursive; font-size: 18px;
+    cursor: pointer; box-shadow: 4px 4px 0 var(--shadow); transition: all 0.1s; flex-shrink: 0;
+}
+.slider-arrow:hover:not(:disabled) { background: var(--accent); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); }
+.slider-arrow:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--shadow); }
+.slider-arrow:disabled { opacity: 0.4; cursor: not-allowed; }
+.slider-counter { text-align: center; font-family: 'Press Start 2P', cursive; font-size: 12px; color: var(--btn); margin: 15px 0; text-shadow: 2px 2px 0 var(--white); }
+.slider-thumbs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; }
+.slider-thumb {
+    aspect-ratio: 16/9; background: var(--btn); border: 3px solid var(--white);
+    box-shadow: 3px 3px 0 var(--shadow); overflow: hidden; cursor: pointer; transition: all 0.15s; position: relative;
+}
+.slider-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slider-thumb:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--shadow); }
+.slider-thumb.active { border-color: var(--accent); box-shadow: 3px 3px 0 var(--accent); transform: translate(-1px, -1px); }
+.slider-thumb .thumb-number {
+    position: absolute; top: 4px; left: 4px; background: var(--btn); color: var(--white);
+    font-family: 'Press Start 2P', cursive; font-size: 8px; padding: 3px 5px; border: 2px solid var(--white);
+}
+.slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.slider-dot { width: 16px; height: 16px; background: var(--btn); border: 2px solid var(--white); cursor: pointer; transition: all 0.1s; }
+.slider-dot:hover { background: var(--btn-hover); }
+.slider-dot.active { background: var(--accent); transform: scale(1.2); }
+
+/* LIGHTBOX */
+.lightbox {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(21, 22, 42, 0.97); z-index: 10000; justify-content: center;
+    align-items: center; padding: 20px; overflow-y: auto;
+}
+.lightbox.active { display: flex; }
+.lightbox-close {
+    position: fixed; top: 20px; right: 20px; background: var(--btn); color: var(--white);
+    border: 3px solid var(--white); width: 50px; height: 50px; font-family: 'Press Start 2P', cursive;
+    font-size: 16px; cursor: pointer; box-shadow: 4px 4px 0 var(--shadow); z-index: 10001; transition: all 0.1s;
+}
+.lightbox-close:hover { background: var(--accent); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); }
+.lightbox-content {
+    max-width: 1200px; width: 100%; background: var(--bg); border: 4px solid var(--white);
+    box-shadow: 8px 8px 0 var(--shadow); padding: 16px; display: flex; flex-direction: column; gap: 16px;
+}
+.lightbox-content img { width: 100%; max-height: 70vh; object-fit: contain; background: #000; border: 3px solid var(--btn); display: block; }
+.lightbox-info { background: var(--white); border: 3px solid var(--btn); padding: 20px; box-shadow: 4px 4px 0 var(--shadow); }
+.lightbox-info h3 { font-family: 'Press Start 2P', cursive; font-size: 14px; color: var(--accent); margin-bottom: 12px; line-height: 1.5; }
+.lightbox-info p { font-size: 22px; line-height: 1.5; color: var(--text); }
+
+/* BUDGET TABLE */
+.budget-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 20px 0; background: var(--white); border: 4px solid var(--btn); box-shadow: 6px 6px 0 var(--shadow); }
+.budget-table th, .budget-table td { padding: 16px; text-align: left; border-bottom: 2px solid var(--bg); font-size: 22px; }
+.budget-table th { background: var(--btn); color: var(--white); font-family: 'Press Start 2P', cursive; font-size: 12px; }
+.budget-table tr:last-child td { border-bottom: none; background: var(--btn); color: var(--white); font-family: 'Press Start 2P', cursive; font-size: 14px; }
+
+/* ROADMAP */
+.roadmap { position: relative; padding-left: 40px; margin-top: 30px; }
+.roadmap::before { content: ""; position: absolute; left: 15px; top: 0; bottom: 0; width: 4px; background: var(--btn); }
+.roadmap-item { position: relative; padding: 20px; margin-bottom: 20px; background: var(--white); border: 4px solid var(--btn); box-shadow: 4px 4px 0 var(--shadow); }
+.roadmap-item::before { content: ""; position: absolute; left: -33px; top: 24px; width: 16px; height: 16px; background: var(--accent); border: 3px solid var(--white); }
+.roadmap-item h4 { font-family: 'Press Start 2P', cursive; font-size: 12px; color: var(--accent); margin-bottom: 10px; line-height: 1.5; }
+
+/* FOOTER */
+footer { background: var(--btn); color: var(--white); padding: 40px 20px; text-align: center; border-top: 4px solid var(--white); }
+footer p { font-family: 'Silkscreen', cursive; font-size: 18px; margin-bottom: 10px; }
+footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 24px; text-shadow: 3px 3px 0 var(--shadow), 6px 6px 0 var(--accent); }
+    .hero .tagline { font-size: 20px; }
+    .section-title { font-size: 16px; }
+    .pixel-card { padding: 20px; }
+    .stat-box .number { font-size: 24px; }
+    .btn { padding: 12px 20px; font-size: 11px; }
+    .team-photo { width: 160px; height: 160px; }
+    .slider-arrow { width: 44px; height: 44px; font-size: 14px; }
+    .slider-caption h3 { font-size: 11px; }
+    .slider-caption p { font-size: 18px; }
+    .slider-thumbs { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; }
+    .lightbox-content { padding: 10px; }
+    .lightbox-info h3 { font-size: 11px; }
+    .lightbox-info p { font-size: 18px; }
+}
+</style>
 </head>
 <body>
 
-<header class="sticky-header">
-    <button class="burger-btn" id="burgerBtn" aria-label="Меню">
-        <span></span><span></span><span></span>
-    </button>
-    <div class="header-right">
-        <div class="contacts">
-            <a href="https://t.me/Czeeep" target="_blank" rel="noopener noreferrer" class="contact-link">💬 Telegram</a>
-            <a href="mailto:pufffoxor@gmail.com" class="contact-link">✉️ pufffoxor@gmail.com</a>
+<!-- HEADER -->
+<header>
+    <nav>
+        <div class="logo">⬛ DEFAULT ZOMBIE SHOOTER</div>
+        <div class="nav-links">
+            <a href="#about">ИГРА</a>
+            <a href="#gallery">СКРИНШОТЫ</a>
+            <a href="#build">БИЛД</a>
+            <a href="#team">КОМАНДА</a>
+            <a href="#roadmap">ПЛАН</a>
+            <a href="#budget">БЮДЖЕТ</a>
+            <a href="#contact">КОНТАКТЫ</a>
         </div>
-        <div class="lang-switch">
-            <button id="lang-ru-btn" class="active">RU</button>
-            <button id="lang-en-btn">EN</button>
-        </div>
-    </div>
+    </nav>
 </header>
 
-<nav class="nav-menu" id="navMenu">
-    <ul id="navList"></ul>
-</nav>
-
-<!-- Русская версия -->
-<div id="ru-content" class="lang-ru active-lang">
-    <main class="container">
-        <!-- Видеоблок с presentation.mp4 -->
-        <div class="video-container">
-            <div class="video-wrapper">
-                <video controls poster="preview.png" preload="none">
-                    <source src="presentation.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                </video>
-            </div>
-            <div class="video-fallback">
-                <a href="https://www.youtube.com/watch?v=l058yZbyRiw" target="_blank" class="button-outline" style="margin-top:0;">📽️ Если видео не грузится — смотреть на YouTube</a>
-            </div>
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>DEFAULT<br>ZOMBIE<br>SHOOTER</h1>
+        <p class="tagline">КО-ОП · ШУТЕР · ЗОМБИ · ВЫЖИВАНИЕ</p>
+        <div class="hero-buttons">
+            <a href="#video" class="btn btn-accent">▶ СМОТРЕТЬ ТРЕЙЛЕР</a>
+            <a href="#build" class="btn">⬇ СКАЧАТЬ БИЛД</a>
         </div>
+    </div>
+</section>
 
-        <!-- Слайдер скриншотов -->
-        <div class="slider-container">
-            <div class="slider-track" id="sliderTrackRu">
-                <div class="slider-slide"><img src="img 1.png" alt="геймплей"><div class="slider-caption">Скриншот 1 - Zombie Rampage</div></div>
-                <div class="slider-slide"><img src="img 2.png" alt="геймплей"><div class="slider-caption">Скриншот 2 - Большой город</div></div>
-                <div class="slider-slide"><img src="img 3.png" alt="геймплей"><div class="slider-caption">Скриншот 3 - Зомби</div></div>
-                <div class="slider-slide"><img src="img 4.png" alt="геймплей"><div class="slider-caption">Скриншот 4 - Лут в каждом здании</div></div>
-                <div class="slider-slide"><img src="img 5.png" alt="геймплей"><div class="slider-caption">Скриншот 5 - Битва с боссом</div></div>
-                <div class="slider-slide"><img src="img 6.png" alt="геймплей"><div class="slider-caption">Скриншот 6 - Инвентарь как в батл рояль</div></div>
-            </div>
-            <button class="slider-btn prev" id="prevBtnRu">‹</button>
-            <button class="slider-btn next" id="nextBtnRu">›</button>
-            <div class="slider-dots" id="sliderDotsRu"></div>
+<!-- VIDEO -->
+<section id="video" class="video-section">
+    <div class="container">
+        <h2 class="section-title">ТРЕЙЛЕР</h2>
+        <div class="video-wrapper">
+            <video controls poster="preview.png" preload="metadata">
+                <source src="video.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
         </div>
+    </div>
+</section>
 
-        <!-- Слайдер референсов -->
-        <h2>🎮 Референсы</h2>
-        <div class="slider-container">
-            <div class="slider-track" id="sliderRefRu">
-                <div class="slider-slide"><img src="scrn 1.png" alt="референс"><div class="slider-caption">Референс 1 - Burglin' Gnomes</div></div>
-                <div class="slider-slide"><img src="scrn 2.png" alt="референс"><div class="slider-caption">Референс 2 - REPO</div></div>
-                <div class="slider-slide"><img src="scrn 3.png" alt="референс"><div class="slider-caption">Референс 3 - Spicies unknown</div></div>
-                <div class="slider-slide"><img src="scrn 4.png" alt="референс"><div class="slider-caption">Референс 4 - Apex Legends</div></div>
-                <div class="slider-slide"><img src="scrn 5.png" alt="референс"><div class="slider-caption">Референс 5 - PUBG</div></div>
+<!-- GALLERY SLIDER -->
+<section id="gallery" class="content-section">
+    <div class="container">
+        <h2 class="section-title">СКРИНШОТЫ</h2>
+        <div class="slider-wrapper">
+            <div class="slider-main">
+                <button class="slider-arrow slider-arrow-prev" id="prevBtn" aria-label="Previous">◀</button>
+                <div class="slider-stage" id="sliderStage">
+                    <img src="" alt="" id="mainImage" class="slider-main-img">
+                    <div class="slider-caption" id="sliderCaption">
+                        <h3 id="captionTitle">Загрузка...</h3>
+                        <p id="captionDesc"></p>
+                    </div>
+                </div>
+                <button class="slider-arrow slider-arrow-next" id="nextBtn" aria-label="Next">▶</button>
             </div>
-            <button class="slider-btn prev" id="prevRefRu">‹</button>
-            <button class="slider-btn next" id="nextRefRu">›</button>
-            <div class="slider-dots" id="sliderRefDotsRu"></div>
+            <div class="slider-counter" id="sliderCounter">1 / 0</div>
+            <div class="slider-thumbs" id="sliderThumbs"></div>
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
+    </div>
+</section>
 
-        <section id="concept">
-            <h2>🧠 Концепция проекта</h2>
-            <h2>Рабочее название - Zombie Rampage</h2>
-            <p><strong>Жанр:</strong> Кооперативный зомби-шутер с выживанием и "открытым миром"</p>
-            <p><strong>Платформа:</strong> ПК (Steam)</p>
-            <div class="feature-grid">
-                <div class="feature-item">👥 Отряд до 4 игроков выполняет миссии на открытой локации города.</div>
-                <div class="feature-item">🎲 Геймплей в духе Battle Royale: сбор ресурсов, оружия и снаряжения на карте.</div>
-                <div class="feature-item">💀 Убийство зомби даёт очки, которые можно потратить на воскрешение павших товарищей.</div>
-                <div class="feature-item">⚰️ Если очков недостаточно — игра заканчивается.</div>
-                <div class="feature-item">🎯 Цель миссии — устранение босса, требующего кооперации и правильной тактики.</div>
-            </div>
-        </section>
+<!-- BUILD SECTION (NEW) -->
+<section id="build" class="content-section">
+    <div class="container">
+        <h2 class="section-title">БИЛД ИГРЫ</h2>
+        <div class="pixel-card" style="text-align: center;">
+            <h3>ТЕКУЩАЯ ВЕРСИЯ ПРОЕКТА</h3>
+            <p style="font-size: 24px; margin-bottom: 20px;">
+                Вы можете скачать актуальный билд игры, чтобы лично оценить геймплей, сетевую синхронизацию и общую атмосферу проекта.
+            </p>
+            <p style="font-size: 20px; margin-bottom: 30px; color: #555;">
+                <em>Требования: Windows 10/11, клавиатура и мышь. Рекомендуется играть с друзьями по сети через Steam.</em>
+            </p>
+            <a href="https://drive.google.com/file/d/1meelnVxeLoe9-42RDZoebnFyREsKJGaa/view?usp=sharing" target="_blank" class="btn btn-accent" style="font-size: 16px; padding: 20px 40px;">
+                ⬇ СКАЧАТЬ БИЛД (Google Drive)
+            </a>
+        </div>
+    </div>
+</section>
 
-        <section id="status">
-            <h2>📊 Текущий статус разработки</h2>
-            <div class="pixel-card">
-                <ul>
-                    <li>✅ Базовая сетевая инфраструктура (кооператив до 4 игроков).</li>
-                    <li>✅ Основные механики: Стрельба, нокаут, поднятие из нокаута, воскрешение, инвентарь, оружие (18 стволов), сетевая синхронизация предметов, простые метки.</li>
-                    <li>✅ Базовый ИИ зомби, система распределения ботов по игрокам.</li>
-                    <li>✅ Часть графического контента (иконки, интерфейс)</li>
-                </ul>
-                <p><strong>Итог:</strong> Согласно декомпозиции игра готова на треть. Осталось довести контент, оптимизировать производительность, добавить всех врагов и боссов, провести полировку и тестирование.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" class="button-outline" id="gdocLinkRu">📊 Полная таблица задач (Google Sheets)</a>
-                     <a href="#" class="button-outline" id="buildLinkRu" style="margin-left: 1rem;">💾 Ссылка на билд</a>
+<!-- ABOUT / IDEA -->
+<section id="about" class="content-section">
+    <div class="container">
+        <h2 class="section-title">ИДЕЯ ИГРЫ</h2>
+        <div class="pixel-card">
+            <h3>ЖАНР И СЕТТИНГ</h3>
+            <p><strong>Жанр:</strong> Кооперативный экшн-шутер от третьего лица с элементами рогалика.<br>
+            <strong>Сеттинг:</strong> Современный постапокалиптический город, захваченный ордами зомби.<br>
+            <strong>Платформа:</strong> Steam (PC), мультиплеер через Steam Relay.</p>
+        </div>
+        <div class="pixel-card">
+            <h3>ИГРОВОЙ ЦИКЛ</h3>
+            <ul>
+                <li>Игроки спавнятся в капсуле возрождения</li>
+                <li>Выполняют указанные в списке заданий поисковые работы</li>
+                <li>Ищут оружие по локации</li>
+                <li>Когда все игроки вооружены, по городу начинают спавниться зомби</li>
+                <li>С убитых зомби падают мозги → можно подобрать и унести в сборщик мозгов зомби → воскресить союзника</li>
+                <li>Сбор лута 5 уровней редкости (механика из батл-роялей)</li>
+                <li>Продвижение к аренам через случайно сгенерированный открытый мир</li>
+                <li>На аренах: волны зомби (игроки сами запускают следующую волну)</li>
+                <li>Финал: большой босс-файт после зачистки всех арен (В планах)</li>
+                <li>Матч завершён → предложение сыграть ещё раз (В планах)</li>
+            </ul>
+        </div>
+        <div class="pixel-card">
+            <h3>УНИКАЛЬНЫЕ ФИЧИ</h3>
+            <ul>
+                <li><strong>Воскрешение через мозги:</strong> тактическое решение — нести мозг или продолжать стрелять</li>
+                <li><strong>Сессионная игра:</strong> каждая сессия независима, без прогрессии между матчами</li>
+                <li><strong>Игроки запускают волны:</strong> темп матча полностью в руках команды</li>
+                <li><strong>Процедурная генерация:</strong> каждый матч уникален</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- AUDIENCE & SIMILAR -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">АУДИТОРИЯ И РЫНОК</h2>
+        <div class="pixel-card">
+            <h3>КТО БУДЕТ ИГРАТЬ?</h3>
+            <ul>
+                <li><strong>18–35 лет, ядро 20–28:</strong> активная аудитория Steam</li>
+                <li><strong>Фанаты кооперативных шутеров:</strong> Left 4 Dead 2, Killing Floor 2, Warhammer 40K: Darktide, Deep Rock Galactic</li>
+                <li><strong>Любители сессионного геймплея:</strong> не хотят долгой прогрессии, ищут быстрый старт</li>
+                <li><strong>Социальные игроки:</strong> собираются с друзьями в Discord/Voice Chat</li>
+            </ul>
+        </div>
+        <div class="pixel-card">
+            <h3>РЕФЕРЕНСЫ РЫНКА</h3>
+            <ul>
+                <li><strong>Far Far West:</strong> сессионная кооперативная игра (главный ориентир)</li>
+                <li><strong>How to Fish:</strong> сессионная игра с открытым миром (главный ориентир)</li>
+                <li><strong>Left 4 Dead 2:</strong> эталон кооперативного зомби-шутера (но без лута и вариативности)</li>
+                <li><strong>Killing Floor 2:</strong> волновой шутер (нет открытого мира и воскрешения)</li>
+            </ul>
+        </div>
+        <div class="pixel-card">
+            <h3>НАША НИША</h3>
+            <p>Я хотел создать <strong>Default Zombie Shooter</strong> игрой, в которую хочется зайти на вечерок. Которая не будет надоедать прогрессией. Это должна быть игра, в которой просто приятно нажимать кнопки. Из недавних игр такими являются <strong>Far Far West</strong> и <strong>How to Fish</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="content-section">
+    <div class="container">
+        <h2 class="section-title">КОМАНДА</h2>
+        <div class="team-section">
+            <img src="photo andrey.jpg" alt="Андрей — разработчик" class="team-photo">
+            <div class="team-info">
+                <div class="pixel-card">
+                    <h3>АНДРЕЙ — ЛИД-РАЗРАБОТЧИК</h3>
+                    <ul>
+                        <li><strong>15+ лет в игровой индустрии</strong></li>
+                        <li>Full-stack геймдев: код, дизайн, геймплей, сетевая оптимизация, UI</li>
+                        <li>Текущий билд игры полностью разработан самостоятельно</li>
+                        <li>Есть команда проверенных специалистов для расширения, кому можно быстро обратиться</li>
+                    </ul>
+                </div>
+                <div class="pixel-card">
+                    <h3>ПЛАН КОМАНДЫ ПОСЛЕ ИНВЕСТИЦИЙ</h3>
+                    <ul>
+                        <li>3 человека на 12 месяцев full-time</li>
+                        <li>Лид-разработчик + 2 специалиста (художник/левел-дизайнер и сетевой инженер)</li>
+                        <li>Маркетинг передаётся издателю</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section id="team">
-            <h2>👾 Команда</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="avatar-wrapper"><div class="avatar-square"><img src="photo alexey.jpg" alt="avatar"></div><div class="tricolor"></div></div>
-                    <h3>Алексей Парников</h3>
-                    <div class="role">Программист, технический дизайнер</div>
-                    <div>15 лет в Unity</div>
-                    <div>Проекты: Коммерческий симулятор разборки/сборки автомобиля, Next-Bot</div>
-                </div>
-                <div class="team-member">
-                    <div class="avatar-wrapper"><div class="avatar-square"><img src="photo andrey.jpg" alt="avatar"></div><div class="tricolor"></div></div>
-                    <h3>Андрей Огребо</h3>
-                    <div class="role">Программист, технический художник, 3D, геймдизайнер</div>
-                    <div>10 лет в Unity</div>
-                    <div>Проекты: Коммерческий симулятор разборки/сборки автомобиля, Next-Bot, Roblox builder, Those Who Remain</div>
-                </div>
-                <div class="team-member">
-                    <div class="avatar-wrapper"><div class="avatar-square"><img src="photo arina.jpg" alt="avatar"></div><div class="tricolor"></div></div>
-                    <h3>Арина Синицына</h3>
-                    <div class="role">Дизайнер</div>
-                    <div>3 года опыта</div>
-                    <div>Проекты: работа в найме</div>
-                </div>
-                <div class="team-member">
-                    <div class="avatar-wrapper"><div class="avatar-square"><img src="photo pavel.jpg" alt="avatar"></div><div class="tricolor"></div></div>
-                    <h3>Павел Максимов</h3>
-                    <div class="role">Программист</div>
-                    <div>1 год опыта</div>
-                    <div>Проекты: Roblox builder</div>
-                </div>
+<!-- ROADMAP -->
+<section id="roadmap" class="content-section">
+    <div class="container">
+        <h2 class="section-title">ПЛАН РАЗВИТИЯ</h2>
+        <p style="text-align:center; font-size:26px; margin-bottom:20px;">Что будет добавлено в течение 12 месяцев</p>
+        <div class="roadmap">
+            <div class="roadmap-item">
+                <h4>КОНТЕНТ: ПРОТИВНИКИ И БОССЫ</h4>
+                <p>10–15 новых типов зомби, включая уникальных боссов для каждой арены и финального мегабосса.</p>
             </div>
-            <p style="text-align: center;"><strong>Опыт совместной разработки — 5 лет</strong></p>
-        </section>
-
-        <section id="publisher">
-            <h2>🤝 Что требуется от издателя</h2>
-            <div class="pixel-card">
-                <ul>
-                    <li>💰 <strong>Финансирование $30 000</strong> на завершение разработки.</li>
-                    <li>🌍 <strong>Помощь с переводом</strong> (локализация на ключевые языки).</li>
-                    <li>🎮 <strong>Оформление страницы в Steam</strong> (создание и настройка).</li>
-                    <li>📢 <strong>Маркетинговую поддержку</strong> (пиар, фестивали, инфлюенсеры).</li>
-                    <li>⚖️ <strong>Юридическое сопровождение</strong> (регистрация, договоры).</li>
-                </ul>
+            <div class="roadmap-item">
+                <h4>КОНТЕНТ: АРЕНЫ</h4>
+                <p>5–6 новых арен с уникальной архитектурой, ловушками и тактическими элементами (сейчас 1).</p>
             </div>
-        </section>
-
-        <section id="timeline">
-            <h2>⏱️ Сроки завершения</h2>
-            <p>При полной занятости и своевременном финансировании проект будет завершён через <strong>6 месяцев</strong>.<br>Декомпозиция: ~2000 человеко-часов.</p>
-            <div class="blocks-grid">
-                <div class="block"><h4>🏙️ Блок 1. Мир и окружение</h4><strong>550+ ч</strong><ul><li>Наполнение</li><li>Расстановка предметов и врагов</li><li>Система ключ-карт</li><li>Оптимизация</li></ul></div>
-                <div class="block"><h4>🧟 Блок 2. Враги и боссы</h4><strong>770+ ч</strong><ul><li>4 новых типа зомби</li><li>5 уникальных боссов</li><li>Анимации, звуки, ИИ</li></ul></div>
-                <div class="block"><h4>🖥️ Блок 3. Системы и UI</h4><strong>450+ ч</strong><ul><li>Главное меню, лобби, настройки</li><li>Редактор персонажа</li></ul></div>
-                <div class="block"><h4>🧹 Блок 4. Полировка, тестирование</h4><strong>400+ ч</strong><ul><li>Альфа/бета-тесты</li><li>Исправление багов, оптимизация</li></ul></div>
+            <div class="roadmap-item">
+                <h4>ТРАНСПОРТ</h4>
+                <p>Добавление транспорта для быстрого перемещения по большому открытому миру.</p>
             </div>
-        </section>
-
-        <section id="why">
-            <h2>💰 Почему $30 000?</h2>
-            <div class="pixel-card">
-                <ul>
-                    <li>Минимальная сумма для полной занятости команды на 6 месяцев.</li>
-                    <li>Локализация, маркетинг, Steam-страница — за счёт издателя.</li>
-                </ul>
+            <div class="roadmap-item">
+                <h4>СЕТЕВАЯ ОПТИМИЗАЦИЯ</h4>
+                <p>Оптимизация сетевого трафика. Это бутылочное горлышко для орды зомби в открытом мире. Сейчас актуально по сети летает 4мб/сек. Есть тестовый код который сокращает эти значения до 50 кб/сек, но нужно время на внедрение.</p>
             </div>
-            <h2>🎯 Ожидаемые результаты</h2>
-            <div class="feature-grid">
-                <div class="feature-item">📦 Готовый релиз в Steam с кооперативом.</div>
-                <div class="feature-item">⚡ Стабильная игра с оптимизированным миром.</div>
-                <div class="feature-item">🧩 Модульность → DLC, новые карты.</div>
-                <div class="feature-item">🔥 Потенциал для режима Battle Royale.</div>
+            <div class="roadmap-item">
+                <h4>UX/UI УЛУЧШЕНИЯ</h4>
+                <p>Кастомизация скинов (минимум — цвет игрока), прицелы с дальномером стрельбы, переработка описаний и отображения предметов.</p>
             </div>
-        </section>
-
-        <section id="terms">
-            <h2>📄 Условия сотрудничества</h2>
-            <div class="offer-split">
-                <p><strong>🤝 Разделение доходов:</strong></p>
-                <p>▪️ <strong>30% / 70%</strong> (разработчики / издатель) <strong>до выхода в 0</strong>.<br>▪️ <strong>50% / 50%</strong> после окупаемости.</p>
-                <hr>
-                <p>✔️ $30 000 идут на разработку (зарплаты 3 разработчиков на 6 месяцев).<br>✔️ Маркетинг, локализация, Steam — издатель.</p>
-            </div>
-        </section>
-
-        <footer>
-            ⚡ Zombie Rampage — кооперативный шутер от российской команды.
-        </footer>
-    </main>
-</div>
-
-<!-- Английская версия (полностью синхронизирована с русской) -->
-<div id="en-content" class="lang-en">
-    <main class="container">
-        <!-- Video block with presentation.mp4 -->
-        <div class="video-container">
-            <div class="video-wrapper">
-                <video controls poster="preview.png" preload="none">
-                    <source src="presentation.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                </video>                
-            </div>
-            <div class="video-fallback">
-                <a href="https://www.youtube.com/watch?v=l058yZbyRiw" target="_blank" class="button-outline" style="margin-top:0;">📽️ If video doesn't load — watch it on YouTube.</a>
+            <div class="roadmap-item">
+                <h4>ПОЛИРОВКА И БАГ-ФИКС</h4>
+                <p>Исправление неприятных багов (критов нет, но есть UX-проблемы), финальная оптимизация.</p>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Slider screenshots -->
-        <div class="slider-container">
-            <div class="slider-track" id="sliderTrackEn">
-                <div class="slider-slide"><img src="img 1.png" alt="gameplay"><div class="slider-caption">Screenshot 1 - Zombie Rampage</div></div>
-                <div class="slider-slide"><img src="img 2.png" alt="gameplay"><div class="slider-caption">Screenshot 2 - Big city</div></div>
-                <div class="slider-slide"><img src="img 3.png" alt="gameplay"><div class="slider-caption">Screenshot 3 - Zombie</div></div>
-                <div class="slider-slide"><img src="img 4.png" alt="gameplay"><div class="slider-caption">Screenshot 4 - Loot in every building</div></div>
-                <div class="slider-slide"><img src="img 5.png" alt="gameplay"><div class="slider-caption">Screenshot 5 - Boss fight</div></div>
-                <div class="slider-slide"><img src="img 6.png" alt="gameplay"><div class="slider-caption">Screenshot 6 - Inventory like in Battle Royale</div></div>
+<!-- BUDGET -->
+<section id="budget" class="content-section">
+    <div class="container">
+        <h2 class="section-title">БЮДЖЕТ</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="number">$100K</span>
+                <span class="label">ОБЩИЙ<br>БЮДЖЕТ</span>
             </div>
-            <button class="slider-btn prev" id="prevBtnEn">‹</button>
-            <button class="slider-btn next" id="nextBtnEn">›</button>
-            <div class="slider-dots" id="sliderDotsEn"></div>
+            <div class="stat-box">
+                <span class="number">12</span>
+                <span class="label">МЕСЯЦЕВ<br>РАЗРАБОТКИ</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">3</span>
+                <span class="label">ЧЕЛОВЕКА<br>В КОМАНДЕ</span>
+            </div>
         </div>
-
-        <!-- Slider references -->
-        <h2>🎮 References</h2>
-        <div class="slider-container">
-            <div class="slider-track" id="sliderRefEn">
-                <div class="slider-slide"><img src="scrn 1.png" alt="reference"><div class="slider-caption">Reference 1 - Burglin' Gnomes</div></div>
-                <div class="slider-slide"><img src="scrn 2.png" alt="reference"><div class="slider-caption">Reference 2 - REPO</div></div>
-                <div class="slider-slide"><img src="scrn 3.png" alt="reference"><div class="slider-caption">Reference 3 - Spicies unknown</div></div>
-                <div class="slider-slide"><img src="scrn 4.png" alt="reference"><div class="slider-caption">Reference 4 - Apex Legends</div></div>
-                <div class="slider-slide"><img src="scrn 5.png" alt="reference"><div class="slider-caption">Reference 5 - PUBG</div></div>
-            </div>
-            <button class="slider-btn prev" id="prevRefEn">‹</button>
-            <button class="slider-btn next" id="nextRefEn">›</button>
-            <div class="slider-dots" id="sliderRefDotsEn"></div>
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>КАТЕГОРИЯ</th>
+                    <th>ОПИСАНИЕ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Команда 3 чел.</td><td>Full-time работа на 12 месяцев</td></tr>
+                <tr><td>Контент</td><td>Противники, боссы, арены, транспорт</td></tr>
+                <tr><td>Техническая оптимизация</td><td>Сеть, трафик, производительность</td></tr>
+                <tr><td>UX/UI и арт</td><td>Скины, прицелы, интерфейс</td></tr>
+                <tr><td>Маркетинг</td><td>Передаётся издателю</td></tr>
+                <tr><td>ИТОГО</td><td>$100,000 на руки</td></tr>
+            </tbody>
+        </table>
+        <div class="pixel-card">
+            <h3>ПОСЛЕ ИНВЕСТИЦИЙ</h3>
+            <p>Вся сумма идёт на разработку. Мы сосредоточимся на создании контента, оптимизации сетевого трафика (самый критичный технический вопрос) и полировке игры. Маркетинг полностью передаётся издателю — мы фокусируемся на продукте.</p>
         </div>
+    </div>
+</section>
 
-        <section id="concept">
-            <h2>🧠 Project Concept</h2>
-            <h2>Working title - Zombie Rampage</h2>
-            <p><strong>Genre:</strong> Cooperative zombie shooter with survival and "open world"</p>
-            <p><strong>Platform:</strong> PC (Steam)</p>
-            <div class="feature-grid">
-                <div class="feature-item">👥 Squad of up to 4 players completing missions in an open city location.</div>
-                <div class="feature-item">🎲 Battle Royale inspired gameplay: scavenge resources, weapons and gear on the map.</div>
-                <div class="feature-item">💀 Killing zombies grants points that can be used to resurrect fallen teammates.</div>
-                <div class="feature-item">⚰️ Not enough points? Game over.</div>
-                <div class="feature-item">🎯 Mission objective — eliminate a unique boss that demands cooperation and tactics.</div>
-            </div>
-        </section>
+<!-- WHY THIS GAME -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">ПОЧЕМУ ИМЕННО ЭТА ИГРА</h2>
+        <div class="pixel-card">
+            <h3>МОТИВАЦИЯ</h3>
+            <ul>
+                <li><strong>Личная страсть:</strong> я обожаю шутеры и наиграл тысячи часов в стрелялки</li>
+                <li><strong>Рыночный анализ:</strong> по секретной таблице свежести жанров в <a href="https://docs.google.com/spreadsheets/d/1SmYWNISQjMiy-odRnH5dLUQNUporunyGm3DinVAAuB8/edit?usp=sharing" target="_blank" style="color: var(--accent);">Steam</a></li>
+                <li><strong>Технический бэкграунд:</strong> уже решены сложные задачи мультиплеера и оптимизации (текущий билд — доказательство)</li>
+                <li><strong>Чёткое видение:</strong> я потратил достаточно времени чтобы сформулировать о чем проект. </li>
+            </ul>
+        </div>
+        <div class="pixel-card">
+            <h3>ПЛЕЙТЕСТ-РЕЗУЛЬТАТЫ</h3>
+            <ul>
+                <li>Тестировал с друзьями</li>
+                <li>Медиана плейтайма: <strong>более 30 минут</strong></li>
+                <li>Удержание: «никто не хочет уходить» — игроки сами просят ещё один матч</li>
+                <li>Это подтверждает реиграбельность и вовлечённость</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-        <section id="status">
-            <h2>📊 Development Status</h2>
-            <div class="pixel-card">
-                <ul>
-                    <li>✅ Core network infrastructure (co-op up to 4 players).</li>
-                    <li>✅ Core mechanics: shooting, knockout, revive from knockout, resurrection, inventory, weapons (18 guns), network item sync, simple pings.</li>
-                    <li>✅ Basic zombie AI, bot distribution system.</li>
-                    <li>✅ Part of graphic assets (icons, UI) ready.</li>
-                </ul>
-                <p><strong>Result:</strong> According to the breakdown, the game is one‑third complete. Remaining: content polish, performance optimization, adding all planned enemies and bosses, polishing and testing.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="#" class="button-outline" id="gdocLinkEn">📊 Full task breakdown (Google Sheets)</a>
-                    <a href="#" class="button-outline" id="buildLinkEn" style="margin-left: 1rem;">💾 Build link</a>
-                </div>
+<!-- CONTACT -->
+<section id="contact" class="content-section">
+    <div class="container">
+        <h2 class="section-title">КОНТАКТЫ</h2>
+        <div class="pixel-card" style="text-align:center;">
+            <h3>ГОТОВЫ К СОТРУДНИЧЕСТВУ</h3>
+            <p style="font-size:26px;">Если вас заинтересовал проект и вы хотите обсудить условия сотрудничества, то буду ждать вашего ответа.</p>
+            <p style="font-size:24px; margin-top:20px;">📧 <strong>ogreboandrey@gmail.com</strong><br>💬 <strong>TELEGRAM <a href="t.me/Czeeep">@Czeeep</a></strong></p>
+            <div style="margin-top:30px;">
+                <a href="mailto:your@email.com" class="btn btn-accent">НАПИСАТЬ</a>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section id="team">
-            <h2>👾 Team</h2>
-            <div class="team-grid">
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo alexey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Alexey Parnikov</h3><div class="role">Programmer, Technical Designer</div><div>15 years in Unity</div><div>Projects: Commercial car assembly sim, Next-Bot</div></div>
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo andrey.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Andrey Ogrebo</h3><div class="role">Programmer, Tech Artist, 3D Artist, Game Designer</div><div>10 years in Unity</div><div>Projects: Commercial car sim, Next-Bot, Roblox builder, Those Who Remain</div></div>
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo arina.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Arina Sinitsyna</h3><div class="role">Designer</div><div>3 years experience</div><div>Projects: work for hire</div></div>
-                <div class="team-member"><div class="avatar-wrapper"><div class="avatar-square"><img src="photo pavel.jpg" alt="avatar"></div><div class="tricolor"></div></div><h3>Pavel Maximov</h3><div class="role">Programmer</div><div>1 year experience</div><div>Projects: Roblox builder</div></div>
-            </div>
-            <p style="text-align: center;"><strong>5 years of joint development experience</strong></p>
-        </section>
+<!-- FOOTER -->
+<footer>
+    <p>Default Zombie Shooter © 2026</p>
+    <p>Сделано с ❤ и пикселями</p>
+    <p class="pixel-font">PRESS START TO CONTINUE...</p>
+</footer>
 
-        <section id="publisher">
-            <h2>🤝 What we need from publisher</h2>
-            <div class="pixel-card">
-                <ul><li>💰 <strong>$30,000 funding</strong> to finish development.</li><li>🌍 <strong>Translation support</strong> (localization into key languages).</li><li>🎮 <strong>Steam page setup & management.</strong></li><li>📢 <strong>Marketing support</strong> (PR, festivals, influencers).</li><li>⚖️ <strong>Legal assistance</strong> (contracts, rights, publishing).</li></ul>
-            </div>
-        </section>
-
-        <section id="timeline">
-            <h2>⏱️ Timeline</h2>
-            <p>With full‑time work and timely funding, the project will be completed in <strong>6 months</strong>.<br>Detailed breakdown: ~2000 person‑hours remain.</p>
-            <div class="blocks-grid">
-                <div class="block"><h4>🏙️ Block 1. World & Environment</h4><strong>550+ hours</strong><ul><li>Filling</li><li>Placement of items and enemies</li><li>Keycard system</li><li>Optimization</li></ul></div>
-                <div class="block"><h4>🧟 Block 2. Enemies & Bosses</h4><strong>770+ hours</strong><ul><li>4 new zombie types</li><li>5 unique bosses</li><li>Animations, sounds, AI</li></ul></div>
-                <div class="block"><h4>🖥️ Block 3. Systems & UI</h4><strong>450+ hours</strong><ul><li>Main menu, lobby, settings</li><li>Character editor</li></ul></div>
-                <div class="block"><h4>🧹 Block 4. Polish & QA</h4><strong>400+ hours</strong><ul><li>Alpha/beta tests</li><li>Bug fixing, optimization</li></ul></div>
-            </div>
-        </section>
-
-        <section id="why">
-            <h2>💰 Why $30,000?</h2>
-            <div class="pixel-card">
-                <ul>
-                    <li>Minimum amount to keep the team full‑time for 6 months.</li>
-                    <li>Localization, marketing, Steam page expenses to be covered by publisher as partner.</li>
-                </ul>
-            </div>
-            <h2>🎯 Expected results for publisher</h2>
-            <div class="feature-grid">
-                <div class="feature-item">📦 Ready‑to‑release Steam product with full co‑op support.</div>
-                <div class="feature-item">⚡ Technically stable game with optimized open world.</div>
-                <div class="feature-item">🧩 Modular architecture → DLC, new maps, modes possible.</div>
-                <div class="feature-item">🔥 Potential to scale into Battle Royale if player base grows.</div>
-            </div>
-        </section>
-
-        <section id="terms">
-            <h2>📄 Partnership terms</h2>
-            <div class="offer-split">
-                <p><strong>🤝 Revenue split:</strong></p>
-                <p>▪️ <strong>30% / 70%</strong> (devs / publisher) <strong>until recoupment</strong>.<br>▪️ <strong>50% / 50%</strong> after the game breaks even.</p>
-                <hr><p>✔️ $30,000 goes exclusively to development (3‑person salary for 6 months).<br>✔️ Marketing, localization, Steam page — handled by publisher as partner.</p>
-            </div>
-        </section>
-        <footer>⚡ Zombie Rampage — cooperative open‑world shooter by a Russian team.</footer>
-    </main>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-info">
+            <h3 id="lightboxTitle"></h3>
+            <p id="lightboxDesc"></p>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Меню (двуязычное)
-    const menuItems = {
-        ru: [
-            { id: "concept", label: "Концепция" },
-            { id: "status", label: "Статус" },
-            { id: "team", label: "Команда" },
-            { id: "publisher", label: "Издателю" },
-            { id: "timeline", label: "Сроки" },
-            { id: "why", label: "Почему $30k" },
-            { id: "terms", label: "Условия" }
-        ],
-        en: [
-            { id: "concept", label: "Concept" },
-            { id: "status", label: "Status" },
-            { id: "team", label: "Team" },
-            { id: "publisher", label: "Publisher" },
-            { id: "timeline", label: "Timeline" },
-            { id: "why", label: "Why $30k" },
-            { id: "terms", label: "Terms" }
-        ]
-    };
+// ===== SLIDER CONFIG =====
+const MAX_SLIDES = 20;
+const EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp'];
+const sliderState = { slides: [], current: 0, total: 0 };
 
-    const navList = document.getElementById('navList');
-    const ruContent = document.getElementById('ru-content');
-    const enContent = document.getElementById('en-content');
-    const ruBtn = document.getElementById('lang-ru-btn');
-    const enBtn = document.getElementById('lang-en-btn');
-    const burger = document.getElementById('burgerBtn');
-    const navMenu = document.getElementById('navMenu');
-    let currentLang = 'ru';
+const mainImage = document.getElementById('mainImage');
+const captionTitle = document.getElementById('captionTitle');
+const captionDesc = document.getElementById('captionDesc');
+const sliderCounter = document.getElementById('sliderCounter');
+const sliderThumbs = document.getElementById('sliderThumbs');
+const sliderDots = document.getElementById('sliderDots');
+const sliderStage = document.getElementById('sliderStage');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 
-    function buildMenu(lang) {
-        const items = menuItems[lang];
-        navList.innerHTML = '';
-        items.forEach(item => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${item.id}`;
-            a.textContent = item.label;
-            a.setAttribute('data-nav-id', item.id);
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = item.id;
-                const activeContainer = (currentLang === 'ru') ? ruContent : enContent;
-                const targetElement = activeContainer.querySelector(`#${targetId}`);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                closeMenu();
-            });
-            li.appendChild(a);
-            navList.appendChild(li);
-        });
-    }
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxDesc = document.getElementById('lightboxDesc');
+const lightboxClose = document.getElementById('lightboxClose');
 
-    function setLanguage(lang) {
-        currentLang = lang;
-        if (lang === 'ru') {
-            ruContent.classList.add('active-lang');
-            enContent.classList.remove('active-lang');
-            ruBtn.classList.add('active');
-            enBtn.classList.remove('active');
-        } else {
-            enContent.classList.add('active-lang');
-            ruContent.classList.remove('active-lang');
-            enBtn.classList.add('active');
-            ruBtn.classList.remove('active');
-        }
-        buildMenu(lang);
-        closeMenu();
-    }
+async function loadDescription(basename) {
+    try {
+        const response = await fetch(`${basename}.txt`);
+        if (!response.ok) return { title: '', desc: '' };
+        const text = await response.text();
+        const lines = text.split(/\r?\n/);
+        const title = (lines[0] || '').trim();
+        const desc = lines.slice(1).join('\n').trim();
+        return { title, desc };
+    } catch (e) { return { title: '', desc: '' }; }
+}
 
-    function closeMenu() { navMenu.classList.remove('open'); }
-    function toggleMenu() { navMenu.classList.toggle('open'); }
-
-    burger.addEventListener('click', toggleMenu);
-    document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !burger.contains(e.target) && navMenu.classList.contains('open')) closeMenu();
+function tryLoadImage(basename, extIndex = 0) {
+    return new Promise((resolve) => {
+        if (extIndex >= EXTENSIONS.length) { resolve(null); return; }
+        const ext = EXTENSIONS[extIndex];
+        const src = `${basename}.${ext}`;
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => tryLoadImage(basename, extIndex + 1).then(resolve);
+        img.src = src;
     });
+}
 
-    ruBtn.addEventListener('click', () => setLanguage('ru'));
-    enBtn.addEventListener('click', () => setLanguage('en'));
-
-    // Общая функция инициализации слайдеров
-    function initSlider(trackId, prevId, nextId, dotsId) {
-        const track = document.getElementById(trackId);
-        if (!track) return;
-        const slides = Array.from(track.children);
-        const prevBtn = document.getElementById(prevId);
-        const nextBtn = document.getElementById(nextId);
-        const dotsContainer = document.getElementById(dotsId);
-        let currentIndex = 0;
-        function updateDots() {
-            if (!dotsContainer) return;
-            dotsContainer.innerHTML = '';
-            slides.forEach((_, idx) => {
-                const dot = document.createElement('span');
-                dot.classList.add('dot');
-                if (idx === currentIndex) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(idx));
-                dotsContainer.appendChild(dot);
-            });
-        }
-        function goToSlide(index) {
-            currentIndex = (index + slides.length) % slides.length;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateDots();
-        }
-        if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-        if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-        updateDots();
-        goToSlide(0);
+async function initSlider() {
+    const loadPromises = [];
+    for (let i = 1; i <= MAX_SLIDES; i++) {
+        const num = String(i).padStart(2, '0');
+        const basename = `scr_${num}`;
+        loadPromises.push(
+            Promise.all([tryLoadImage(basename), loadDescription(basename)]).then(([imgSrc, desc]) => {
+                if (imgSrc) return { index: i, imgSrc, title: desc.title || `Скриншот ${i}`, desc: desc.desc || '' };
+                return null;
+            })
+        );
     }
+    const results = await Promise.all(loadPromises);
+    sliderState.slides = results.filter(s => s !== null).sort((a, b) => a.index - b.index);
+    sliderState.total = sliderState.slides.length;
 
-    // Инициализация всех слайдеров
-    initSlider('sliderTrackRu', 'prevBtnRu', 'nextBtnRu', 'sliderDotsRu');
-    initSlider('sliderTrackEn', 'prevBtnEn', 'nextBtnEn', 'sliderDotsEn');
-    initSlider('sliderRefRu', 'prevRefRu', 'nextRefRu', 'sliderRefDotsRu');
-    initSlider('sliderRefEn', 'prevRefEn', 'nextRefEn', 'sliderRefDotsEn');
+    if (sliderState.total === 0) {
+        sliderStage.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#fff;font-family:\'Silkscreen\',cursive;font-size:20px;text-align:center;padding:20px;">Скриншоты не найдены.<br>Добавьте файлы scr_01.png (или .jpg) и scr_01.txt рядом с index.html</div>';
+        prevBtn.disabled = true; nextBtn.disabled = true; return;
+    }
+    renderThumbnails(); renderDots(); showSlide(0);
+}
 
-    // Ссылки
-    const fakeUrl = 'https://docs.google.com/spreadsheets/d/1pDWc2KZOUT6x05wJ8Ly7rlXjnBFhU8BVcHpF_G4SRB8/edit?usp=sharing';
-    const fakeBuild = 'https://drive.google.com/file/d/1WafIwWv5BgvxpS0aSl7-dxQyPs2ib7VT/view?usp=sharing';
-    const gdocRu = document.getElementById('gdocLinkRu');
-    const gdocEn = document.getElementById('gdocLinkEn');
-    const buildRu = document.getElementById('buildLinkRu');
-    const buildEn = document.getElementById('buildLinkEn');
-    if (gdocRu) gdocRu.href = fakeUrl;
-    if (gdocEn) gdocEn.href = fakeUrl;
-    if (buildRu) buildRu.href = fakeBuild;
-    if (buildEn) buildEn.href = fakeBuild;
+function renderThumbnails() {
+    sliderThumbs.innerHTML = '';
+    sliderState.slides.forEach((slide, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'slider-thumb'; thumb.dataset.index = idx;
+        thumb.innerHTML = `<img src="${slide.imgSrc}" alt="${slide.title}"><span class="thumb-number">${String(slide.index).padStart(2, '0')}</span>`;
+        thumb.addEventListener('click', () => showSlide(idx));
+        sliderThumbs.appendChild(thumb);
+    });
+}
 
-    buildMenu('ru');
+function renderDots() {
+    sliderDots.innerHTML = '';
+    sliderState.slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'slider-dot'; dot.dataset.index = idx;
+        dot.addEventListener('click', () => showSlide(idx));
+        sliderDots.appendChild(dot);
+    });
+}
+
+function showSlide(index) {
+    if (index < 0 || index >= sliderState.total) return;
+    sliderState.current = index;
+    const slide = sliderState.slides[index];
+    mainImage.classList.add('loading');
+    mainImage.src = slide.imgSrc;
+    mainImage.alt = slide.title;
+    mainImage.onload = () => mainImage.classList.remove('loading');
+    captionTitle.textContent = slide.title;
+    captionDesc.textContent = slide.desc;
+    sliderCounter.textContent = `${index + 1} / ${sliderState.total}`;
+    document.querySelectorAll('.slider-thumb').forEach((th, i) => th.classList.toggle('active', i === index));
+    document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    const activeThumb = sliderThumbs.children[index];
+    if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === sliderState.total - 1;
+}
+
+prevBtn.addEventListener('click', () => showSlide(sliderState.current - 1));
+nextBtn.addEventListener('click', () => showSlide(sliderState.current + 1));
+
+document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showSlide(sliderState.current - 1);
+        if (e.key === 'ArrowRight') showSlide(sliderState.current + 1);
+        return;
+    }
+    const rect = sliderStage.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+        if (e.key === 'ArrowLeft') showSlide(sliderState.current - 1);
+        if (e.key === 'ArrowRight') showSlide(sliderState.current + 1);
+    }
+});
+
+sliderStage.addEventListener('click', () => {
+    const slide = sliderState.slides[sliderState.current];
+    if (!slide) return;
+    lightboxImg.src = slide.imgSrc;
+    lightboxTitle.textContent = slide.title;
+    lightboxDesc.textContent = slide.desc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+initSlider();
 </script>
 </body>
 </html>
