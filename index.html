@@ -97,7 +97,6 @@ nav {
 .btn-accent:hover { background: var(--accent-dark); }
 
 /* VIDEO */
-.video-section { padding: 60px 20px; background: var(--bg); }
 .video-wrapper {
     max-width: 960px; margin: 0 auto; border: 4px solid var(--white);
     box-shadow: 8px 8px 0 var(--shadow); background: var(--btn); padding: 8px;
@@ -105,8 +104,11 @@ nav {
 .video-wrapper video { width: 100%; display: block; aspect-ratio: 16/9; background: #000; }
 
 /* SECTIONS */
-section.content-section { padding: 60px 20px; border-top: 4px solid var(--shadow); background: var(--bg); }
-section.content-section:nth-of-type(even) { background: var(--bg-dark); }
+section.video-section,
+section.content-section { padding: 60px 20px; background: var(--bg); }
+section.content-section { border-top: 4px solid var(--shadow); }
+section.video-section:nth-child(even),
+section.content-section:nth-child(even) { background: var(--bg-dark); }
 .section-title {
     font-family: 'Press Start 2P'; font-size: 24px; color: var(--white);
     text-shadow: 3px 3px 0 var(--shadow); margin-bottom: 30px; text-align: center; line-height: 1.6;
@@ -249,6 +251,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
     <nav>
         <div class="logo">⬛ DEFAULT ZOMBIE SHOOTER</div>
         <div class="nav-links">
+            <a href="#video">ТРЕЙЛЕР</a>
             <a href="#gallery">СКРИНШОТЫ</a>
             <a href="#build">БИЛД</a>
             <a href="#about">ИГРА</a>
@@ -264,7 +267,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
 <section class="hero">
     <div class="container">
         <h1>DEFAULT<br>ZOMBIE<br>SHOOTER</h1>
-        <p class="tagline">КО-ОП · ШУТЕР · ЗОМБИ · ВЫЖИВАНИЕ</p>
+        <p class="tagline">КООП · ОДНА СЕССИЯ · ПРОЦЕДУРНЫЙ ГОРОД</p>
         <div class="hero-buttons">
             <a href="#video" class="btn btn-accent">▶ СМОТРЕТЬ ТРЕЙЛЕР</a>
             <a href="#build" class="btn">⬇ СКАЧАТЬ БИЛД</a>
@@ -320,7 +323,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             <p style="font-size: 20px; margin-bottom: 30px; color: #555;">
                 <em>Требования: Windows 10/11, клавиатура и мышь. Рекомендуется играть с друзьями по сети через Steam.</em>
             </p>
-            <a href="https://drive.google.com/file/d/1meelnVxeLoe9-42RDZoebnFyREsKJGaa/view?usp=sharing" target="_blank" class="btn btn-accent" style="font-size: 16px; padding: 20px 40px;">
+            <a href="https://drive.google.com/file/d/1NO3PQ_s3zgX0q-xi-NBEYiiHTc-wj38c/view?usp=sharing" target="_blank" class="btn btn-accent" style="font-size: 16px; padding: 20px 40px;">
                 ⬇ СКАЧАТЬ БИЛД (Google Drive)
             </a>
         </div>
@@ -333,32 +336,37 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
         <h2 class="section-title">ИДЕЯ ИГРЫ</h2>
         <div class="pixel-card">
             <h3>ЖАНР И СЕТТИНГ</h3>
-            <p><strong>Жанр:</strong> Кооперативный экшн-шутер от третьего лица с элементами рогалика.<br>
-            <strong>Сеттинг:</strong> Современный постапокалиптический город, захваченный ордами зомби.<br>
-            <strong>Платформа:</strong> Steam (PC), мультиплеер через Steam Relay.</p>
+            <p><strong>Жанр:</strong> Кооперативный шутер от третьего лица на одну сессию.<br>
+            <strong>Сеттинг:</strong> Процедурный город в пустыне. Новый матч — новая раскладка улиц, домов и арен.<br>
+            <strong>Платформа:</strong> Steam (PC), мультиплеер через Steam.<br>
+            <strong>Лут:</strong> Пять редкостей, броня, рюкзак и обвесы живут только внутри матча. Прицел показывает дистанцию.</p>
         </div>
         <div class="pixel-card">
             <h3>ИГРОВОЙ ЦИКЛ</h3>
             <ul>
-                <li>Игроки спавнятся в капсуле возрождения</li>
-                <li>Выполняют указанные в списке заданий поисковые работы</li>
-                <li>Ищут оружие по локации</li>
-                <li>Когда все игроки вооружены, по городу начинают спавниться зомби</li>
-                <li>С убитых зомби падают мозги → можно подобрать и унести в сборщик мозгов зомби → воскресить союзника</li>
-                <li>Сбор лута 5 уровней редкости (механика из батл-роялей)</li>
-                <li>Продвижение к аренам через случайно сгенерированный открытый мир</li>
-                <li>На аренах: волны зомби (игроки сами запускают следующую волну)</li>
-                <li>Финал: большой босс-файт после зачистки всех арен (В планах)</li>
-                <li>Матч завершён → предложение сыграть ещё раз (В планах)</li>
+                <li>Команда стартует в закрытых капсулах. Пока капсула не открыта, можно только крутить камеру. Открытие — мини-игры: провода и распределительный щиток</li>
+                <li>Найти экстрактор мозгов</li>
+                <li>Найти оружие. Когда вооружены все, по улицам выходят патрули</li>
+                <li>Собрать мозги в экстрактор: 3 на игрока</li>
+                <li>Нокаут поднимают дефибриллятором: электроды на груди и заряд. Респавн стоит 3 мозга — из ящика смерти или у живого союзника</li>
+                <li>Зачистить арены. Мини-игра на маркере (диск телефона, стрелки) запускает волну: 5 зомби на игрока. Следующую волну запускает команда. За зачистку — аирдроп</li>
+                <li>Конец цепочки — экран матча: киллы, урон, лечение, нокауты, подъёмы, мозги и очки. Финальный босс и «сыграть ещё раз» — в планах</li>
             </ul>
         </div>
         <div class="pixel-card">
-            <h3>УНИКАЛЬНЫЕ ФИЧИ</h3>
+            <h3>МОЗГИ — ВАЛЮТА МАТЧА</h3>
             <ul>
-                <li><strong>Воскрешение через мозги:</strong> тактическое решение — нести мозг или продолжать стрелять</li>
-                <li><strong>Сессионная игра:</strong> каждая сессия независима, без прогрессии между матчами</li>
-                <li><strong>Игроки запускают волны:</strong> темп матча полностью в руках команды</li>
-                <li><strong>Процедурная генерация:</strong> каждый матч уникален</li>
+                <li>Квест требует сдать 3 мозга на игрока в экстрактор</li>
+                <li>Магазин экстрактора: шлем, броня, рюкзак, расходники</li>
+                <li>Респавн союзника стоит 3 мозга. Подъём из нокаута мозги не тратит — это дефибриллятор</li>
+            </ul>
+        </div>
+        <div class="pixel-card">
+            <h3>МИНИ-ИГРЫ НА РУКАХ</h3>
+            <ul>
+                <li><strong>Капсула:</strong> соединить провода и выставить щиток</li>
+                <li><strong>Арена:</strong> диск телефона и стрелки. Успех запускает волну, темп матча у команды</li>
+                <li><strong>Нокаут:</strong> дефибриллятор — поставить электроды и дать разряд</li>
             </ul>
         </div>
     </div>
@@ -382,13 +390,13 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             <ul>
                 <li><strong>Far Far West:</strong> сессионная кооперативная игра (главный ориентир)</li>
                 <li><strong>How to Fish:</strong> сессионная игра с открытым миром (главный ориентир)</li>
-                <li><strong>Left 4 Dead 2:</strong> эталон кооперативного зомби-шутера (но без лута и вариативности)</li>
-                <li><strong>Killing Floor 2:</strong> волновой шутер (нет открытого мира и воскрешения)</li>
+                <li><strong>Left 4 Dead 2:</strong> эталон кооперативного зомби-шутера. Здесь другой матч: процедурный город, лут внутри сессии, мини-игры и мозги как общий ресурс</li>
+                <li><strong>Killing Floor 2:</strong> волновой шутер. Здесь волну запускает команда мини-игрой, а вокруг арен — открытый город</li>
             </ul>
         </div>
         <div class="pixel-card">
             <h3>НАША НИША</h3>
-            <p>Я хотел создать <strong>Default Zombie Shooter</strong> игрой, в которую хочется зайти на вечерок. Которая не будет надоедать прогрессией. Это должна быть игра, в которой просто приятно нажимать кнопки. Из недавних игр такими являются <strong>Far Far West</strong> и <strong>How to Fish</strong>.</p>
+            <p>Я делаю <strong>Default Zombie Shooter</strong> игрой на один вечер с друзьями. Без меты между матчами: зашёл, пострелял, прошёл мини-игры и вышел. Мне важно, чтобы было приятно нажимать кнопки. Из недавних игр так ощущаются <strong>Far Far West</strong> и <strong>How to Fish</strong>.</p>
         </div>
     </div>
 </section>
@@ -442,7 +450,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             </div>
             <div class="roadmap-item">
                 <h4>СЕТЕВАЯ ОПТИМИЗАЦИЯ</h4>
-                <p>Оптимизация сетевого трафика. Это бутылочное горлышко для орды зомби в открытом мире. Сейчас актуально по сети летает 4мб/сек. Есть тестовый код который сокращает эти значения до 50 кб/сек, но нужно время на внедрение.</p>
+                <p>Оптимизация сетевого трафика. Орда зомби в открытом мире — бутылочное горлышко. Сейчас по сети уходит около 4 МБ/с. Тестовый код снижает это до 50 КБ/с, внедрение ещё впереди.</p>
             </div>
             <div class="roadmap-item">
                 <h4>UX/UI УЛУЧШЕНИЯ</h4>
@@ -450,7 +458,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             </div>
             <div class="roadmap-item">
                 <h4>ПОЛИРОВКА И БАГ-ФИКС</h4>
-                <p>Исправление неприятных багов (критов нет, но есть UX-проблемы), финальная оптимизация.</p>
+                <p>Критичных блокеров нет. Остаются шероховатости управления и интерфейса, плюс финальная оптимизация.</p>
             </div>
         </div>
     </div>
@@ -505,9 +513,9 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             <h3>МОТИВАЦИЯ</h3>
             <ul>
                 <li><strong>Личная страсть:</strong> я обожаю шутеры и наиграл тысячи часов в стрелялки</li>
-                <li><strong>Рыночный анализ:</strong> по секретной таблице свежести жанров в <a href="https://docs.google.com/spreadsheets/d/1SmYWNISQjMiy-odRnH5dLUQNUporunyGm3DinVAAuB8/edit?usp=sharing" target="_blank" style="color: var(--accent);">Steam</a></li>
+                <li><strong>Рыночный анализ:</strong> по таблице свежести жанров в <a href="https://docs.google.com/spreadsheets/d/1SmYWNISQjMiy-odRnH5dLUQNUporunyGm3DinVAAuB8/edit?usp=sharing" target="_blank" style="color: var(--accent);">Steam</a></li>
                 <li><strong>Технический бэкграунд:</strong> уже решены сложные задачи мультиплеера и оптимизации (текущий билд — доказательство)</li>
-                <li><strong>Чёткое видение:</strong> я потратил достаточно времени чтобы сформулировать о чем проект. </li>
+                <li><strong>Чёткое видение:</strong> я потратил достаточно времени, чтобы сформулировать, о чём проект.</li>
             </ul>
         </div>
         <div class="pixel-card">
@@ -515,8 +523,7 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
             <ul>
                 <li>Тестировал с друзьями</li>
                 <li>Медиана плейтайма: <strong>более 30 минут</strong></li>
-                <li>Удержание: «никто не хочет уходить» — игроки сами просят ещё один матч</li>
-                <li>Это подтверждает реиграбельность и вовлечённость</li>
+                <li>Игроки сами просят ещё один матч</li>
             </ul>
         </div>
     </div>
@@ -529,9 +536,9 @@ footer .pixel-font { color: var(--accent); font-size: 12px; margin-top: 20px; }
         <div class="pixel-card" style="text-align:center;">
             <h3>ГОТОВЫ К СОТРУДНИЧЕСТВУ</h3>
             <p style="font-size:26px;">Если вас заинтересовал проект и вы хотите обсудить условия сотрудничества, то буду ждать вашего ответа.</p>
-            <p style="font-size:24px; margin-top:20px;">📧 <strong>ogreboandrey@gmail.com</strong><br>💬 <strong>TELEGRAM <a href="t.me/Czeeep">@Czeeep</a></strong></p>
+            <p style="font-size:24px; margin-top:20px;">📧 <strong>ogreboandrey@gmail.com</strong><br>💬 <strong>TELEGRAM <a href="https://t.me/Czeeep">@Czeeep</a></strong></p>
             <div style="margin-top:30px;">
-                <a href="mailto:your@email.com" class="btn btn-accent">НАПИСАТЬ</a>
+                <a href="mailto:ogreboandrey@gmail.com" class="btn btn-accent">НАПИСАТЬ</a>
             </div>
         </div>
     </div>
